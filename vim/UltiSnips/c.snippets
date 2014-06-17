@@ -1,0 +1,202 @@
+
+###########################################################################
+#                            TextMate Snippets                            #
+###########################################################################
+#snippet HIDE_HD "headsome" !b
+#/**
+# * @file       `!p snip.rv = snip.fn or "untitled"`
+# * @author     ghlin <2012.2.9.ghl@gmail.com>
+# * @date       `!v strftime("%m %d - %X")`
+# *
+# * @section    LICENSE
+# *
+# * Copyright (C) 2014  ghlin <2012.2.9.ghl@gmail.com>
+# *
+# * All rights reserved.
+# *
+# * This program and the accompanying materials are made available under the terms
+# * of the GNU Lesser General Public License version 2.1 which accompanies this
+# * distribution.
+# *
+# * This library is distributed in the hope that it will be useful, but WITHOUT ANY
+# * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# * PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
+# *
+# * You should have received a copy of the GNU Lesser General Public License along
+# * with this program. If not, see <http://www.gnu.org/licenses/>.
+# *
+# * @endsection
+# *
+# * @brief      $1
+# *
+# */
+#
+#$0
+#endsnippet
+
+snippet hd "headsome" !b
+/*
+ * file       `!p snip.rv = snip.fn or "untitled"`
+ * author     ghlin <2012.2.9.ghl@gmail.com>
+ * date       `!v strftime("%Y %b %d - %X")`
+ * modified   `!v strftime("%Y %b %d - %X")`
+ * license    LGPL
+ * brief      ${1:`!p snip.rv = snip.fn or "none"`}
+ */
+
+$0
+endsnippet
+
+snippet oldhd "headsome" !b
+/**
+ * \file       `!p snip.rv = snip.fn or "untitled"`
+ * \author     ghlin <2012.2.9.ghl@gmail.com>
+ * \date       `!v strftime("%b %d - %X")`
+ *
+ * \section    LICENSE
+ *
+ * Copyright (C) 2014  ghlin <2012.2.9.ghl@gmail.com>
+ *
+ * All rights reserved.
+ *
+ * This program and the accompanying materials are made available under the terms
+ * of the GNU Lesser General Public License version 2.1 which accompanies this
+ * distribution.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along
+ * with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
+ * \section   DESCRIPTION
+ * $1
+ */
+
+$0
+endsnippet
+
+# remove this later
+snippet lic "lgpl header for current project" !b
+/*
+ * ${1:`!p snip.rv = snip.fn`}
+ * This file is part of ${2:Project}
+ *
+ * Copyright (C) 2014  ghlin<2012.2.9.ghl@gmail.com>
+ *
+ * All rights reserved.
+ *
+ * This program and the accompanying materials are made available under the terms
+ * of the GNU Lesser General Public License version 2.1 which accompanies this
+ * distribution.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along
+ * with DuelPlus. If not, see <http://www.gnu.org/licenses/>.
+ */
+$0
+endsnippet
+
+
+snippet gpl "gpl lic" !b
+/**
+ * ${1:`!p snip.rv = snip.fn`}
+ * This file is part of ${2:<proj>}
+ *
+ * Copyright (C) 2014  ghlin<2012.2.9.ghl@gmail.com>
+ *
+ * $2 is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * $2 is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with $2. If not, see <http://www.gnu.org/licenses/>.
+ */
+$0
+endsnippet
+
+snippet inc "#Include" !b
+#include <$1>
+$0
+endsnippet
+
+snippet main "main() (main)" !b
+
+int main(int argc, char **argv)
+{
+  ${1:/* code */}
+  return 0;
+}
+
+endsnippet
+
+
+snippet once "Include header once only guard"
+#ifndef ${1:__`!p
+if not snip.c:
+  import random, string
+  name = re.sub(r'[^A-Za-z0-9]+','_', snip.fn).upper()
+  rand = ''.join(random.sample(string.ascii_letters+string.digits, 8))
+  snip.rv = ('%s_%s' % (name,rand)).upper()
+else:
+    snip.rv = snip.c`__}
+#define $1
+
+${0}
+
+#endif // end of include guard: $1
+
+endsnippet
+
+snippet st "struct" !bs
+struct $1
+{
+  $0
+};
+endsnippet
+
+snippet todo "a todo reminder" !bs
+// ${1:TODO}(ghlin) : ${2:reminder} `!v strftime("%m %d - %X")`
+endsnippet
+
+snippet xxx "a xxx reminder" !bs
+// ${1:XXX}(ghlin) : ${2:reminder} `!v strftime("%m %d - %X")`
+endsnippet
+
+snippet fixme "a fixme reminder" !bs
+// ${1:FIXME}(ghlin) : ${2:reminder} `!v strftime("%m %d - %X")`
+endsnippet
+
+snippet comment "a nice comment" !bs
+/**
+ * $1
+ */$0
+endsnippet
+
+snippet "([^ 	])-" "->" !ir
+`!p snip.rv = match.group(1)`->$0
+endsnippet
+
+snippet " -" "x - x" !ir
+ - $0
+endsnippet
+
+snippet undef "undefine macro" !b
+#ifdef $1
+#undef $1
+#endif
+$0
+endsnippet
+
+# vim:ft=snippets:
+

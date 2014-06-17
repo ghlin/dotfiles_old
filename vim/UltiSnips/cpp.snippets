@@ -1,0 +1,45 @@
+extends c
+
+###########################################################################
+#                            TextMate Snippets                            #
+###########################################################################
+
+snippet tp "template" !b
+template <typename $1>
+$0
+endsnippet
+
+snippet ns "namespace .. (namespace)"
+namespace ${1:details} {
+$0
+} // namespace $1
+endsnippet
+
+snippet NS_ "BEGIN|END_NAMESPACE(xxx)" !b
+
+BEGIN_NAMESPACE($1)
+
+$0
+
+END_NAMESPACE($1)
+
+endsnippet
+
+snippet NS  "XXXX_BEGIN|END_NAMESPACE" !b
+${1:PROJ}_BEGIN_NAMESPACE
+
+$0
+
+$1_END_NAMESPACE
+
+endsnippet
+
+snippet cl "class xx" !b
+class $1
+{
+  $0
+};
+
+endsnippet
+
+# vim:ft=snippets:
