@@ -17,6 +17,7 @@ local mocp = wibox.widget.textbox()
 local mocp_on_song_change = function (title, ar, file)
   local text
   if title == '' and file then
+    file = require 'lib.basename' ['basename'] (file)
     text = '<span foreground="yellow">' .. file .. '</span>'
   elseif file then
     text = '<span foreground="blue">' .. title .. '</span> by <span foreground="red">' .. ar .. '</span>'
