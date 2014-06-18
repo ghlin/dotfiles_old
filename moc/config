@@ -636,8 +636,7 @@ SyncPlaylist = yes
 # can do the job.
 #
 # Example:    OnSongChange = "/home/jack/.moc/myscript %a %r"
-#MARK
-OnSongChange = "/home/ghlin/.moc/onsongchange.sh %t %a %f"
+OnSongChange = "/home/ghlin/.config/awesome/lib/onsongchange.sh %t %a %f"
 
 # If RepeatSongChange is 'yes' then MOC will execute the command every time
 # a song starts playing regardless of whether or not it is just repeating.
@@ -647,7 +646,7 @@ RepeatSongChange = yes
 
 # Run the OnStop command (full path, no arguments) when MOC changes state
 # to stopped (i.e., when user stopped playing or changes a song).
-OnStop = "/home/ghlin/.moc/onsongchange.sh"
+OnStop = "/home/ghlin/.config/awesome/lib/onsongstop.sh"
 
 # This option determines which song to play after finishing all the songs
 # in the queue.  Setting this to 'yes' causes MOC to play the song which
