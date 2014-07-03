@@ -40,7 +40,7 @@ end
 -- {{{ Layouts
 local layouts = {
   awful.layout.suit.floating,
-  awful.layout.suit.spiral.dwindle,
+  awful.layout.suit.tile,
   awful.layout.suit.magnifier
 }
 -- }}}
@@ -55,22 +55,26 @@ end
 
 -- {{{ Tags
 do
-  local names  = { "１", "２", "⑨", "☯" }
+  -- local names  = { "１", "２", "⑨", "☯" }
+  local names  = { ' Term', ' Term', ' Dev', ' WWW', ' FM', ' Daily' }
   local layout = {}
+  local icons  = {}
 
   for i, _ in ipairs(names) do
     layout[i] = layouts[2]
+    icons[i]  = beautiful.arrr
   end
 
   layout[#layout] = layouts[1]
 
-  tags = {
-    names  = names;
-    layout = layout;
-  }
+  tags = {}
 
   for s = 1, screen.count() do
-    tags[s] = awful.tag(tags.names, s, tags.layout)
+    tags[s] = awful.tag(names, s, layout)
+
+    for i = 1, #names do
+      awful.tag.seticon(icons[i], tags[s][i])
+    end
   end
 end
 -- }}}
@@ -83,11 +87,11 @@ myawsomemenu = {
 
 mymainmenu = awful.menu {
   items = {
-    { "Awesome", myawsomemenu, beautiful.awesome_icon };
-    { "File Manager", "thunar" };
-    { "Browser", "chromium" };
-    { "Text Editor", "gvim" };
-    { "Terminal", terminal };
+    { "Awesome",      myawsomemenu, beautiful.awesome_icon };
+    { "Browser",      "chromium",   beautiful.browser      };
+    { "Text Editor",  "gvim",       beautiful.text_editor  };
+    { "File Manager", "thunar",     beautiful.thunar       };
+    { "Terminal",     terminal,     beautiful.terminal     };
   }
 }
 -- }}}
@@ -141,11 +145,25 @@ mytasklist.buttons = awful.util.table.join(
     if client.focus then client.focus:raise() end
   end))
 
+mylauncher = awful.widget.launcher {
+  image = beautiful.awesome_icon;
+  menu  = mymainmenu;
+}
+
 for s = 1, screen.count() do
-  mypromptbox[s]    = awful.widget.prompt { prompt = " Shell >> " }
+  mywibox[s]     = awful.wibox {
+    position     = "top";
+    height       = 12;
+    screen       = s
+  }
+
+  mypromptbox[s] = awful.widget.prompt {
+    prompt       = ' Shell >> ';
+  }
 
   -- Layoutbox
-  mylayoutbox[s]    = awful.widget.layoutbox(s)
+  mylayoutbox[s] = widgets.layoutbox(s)
+
   mylayoutbox[s]:buttons(awful.util.table.join(
       awful.button({ }, 1, function () awful.layout.inc(layouts,  1) end),
       awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
@@ -154,30 +172,51 @@ for s = 1, screen.count() do
 
   mytaglist[s]      = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
   mytasklist[s]     = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
-  mywibox[s]        = awful.wibox { position = "top", height = 12, screen = s }
 
   local left_wibox  = wibox.layout.fixed.horizontal()
 
-  left_wibox:add(mytaglist[s])
-  left_wibox:add(mylayoutbox[s])
+  left_wibox:add(mylauncher)
+  left_wibox:add(widgets.space_sep)
+  left_wibox:add(widgets.arrr)
   left_wibox:add(mypromptbox[s])
+  left_wibox:add(mytaglist[s])
+  left_wibox:add(widgets.arrr)
+  left_wibox:add(widgets.space_sep)
+  left_wibox:add(mylayoutbox[s])
+  left_wibox:add(widgets.space_sep)
+  left_wibox:add(widgets.arrr)
+  left_wibox:add(widgets.arrr)
 
   local right_wibox = wibox.layout.fixed.horizontal()
 
+  right_wibox:add(widgets.arrl)
+  right_wibox:add(widgets.arrl)
+  right_wibox:add(widgets.space_sep)
+  right_wibox:add(widgets.mocp_icon)
+  right_wibox:add(widgets.space_sep)
   right_wibox:add(widgets.mocp)
-  right_wibox:add(widgets.sep)
+  right_wibox:add(widgets.space_sep)
+  right_wibox:add(widgets.arrl)
+  right_wibox:add(widgets.space_sep)
 
-  --right_wibox:add(widgets.uptime)
-  --right_wibox:add(widgets.sep)
+--  right_wibox:add(widgets.uptime_icon)
+--  right_wibox:add(widgets.uptime)
+--  widgets.spaced_arrl(right_wibox)
 
+  right_wibox:add(widgets.volume_icon)
   right_wibox:add(widgets.volume)
-  right_wibox:add(widgets.sep)
+  widgets.spaced_arrl(right_wibox)
 
+  right_wibox:add(widgets.battery_icon)
   right_wibox:add(widgets.battery)
-  right_wibox:add(widgets.sep)
+  widgets.spaced_arrl(right_wibox)
 
-  if s == 1 then right_wibox:add(wibox.widget.systray()) end
+  if s == 1 then
+    right_wibox:add(wibox.widget.systray())
+    widgets.spaced_arrl(right_wibox)
+  end
 
+  right_wibox:add(widgets.clock_icon)
   right_wibox:add(widgets.textclock)
 
   local wibox_layout = wibox.layout.align.horizontal()
@@ -196,7 +235,7 @@ globalkeys = awful.util.table.join(
   awful.key({ modkey }, "Right",  awful.tag.viewnext),
   awful.key({ modkey }, "Escape", awful.tag.history.restore),
 
-  awful.key({ modkey }, "w", function () mymainmenu:show() end),
+  awful.key({ modkey }, "w", function () mymainmenu:toggle() end),
 
   -- Layout manipulation
   awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
@@ -234,32 +273,24 @@ globalkeys = awful.util.table.join(
   awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
 
-  -- XF86 function keys
+  -- Media key
   awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn 'amixer sset Master,0 5%-'  end),
   awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn 'amixer sset Master,0 5%+'  end),
   awful.key({ }, "XF86AudioMute",        function () awful.util.spawn 'amixer sset Master toggle' end),
-  awful.key({ }, "XF86AudioPlay",        function () awful.util.spawn 'mocp --toggle'             end),
+  awful.key({ }, "XF86AudioPlay",        function () awful.util.spawn 'mocp --toggle-pause'       end),
   awful.key({ }, "XF86AudioNext",        function () awful.util.spawn 'mocp --next'               end),
   awful.key({ }, "XF86AudioPrev",        function () awful.util.spawn 'mocp --previous'           end),
 
   awful.key({ }, "Print",
     function ()
-      awful.util.spawn_with_shell "/usr/bin/scrot -e 'mv $f ~/Pictures/'";
-
-      naughty.notify {
-        title = 'Scrot Done !';
-        text  = 'Save file into ~/Pictures/';
-      }
+      awful.util.spawn_with_shell([=[/usr/bin/scrot -e 'echo "require [[naughty]][ [[notify]] ] ]=]
+        .. [=[ { title = [[Scrot Done!]]; text = [[Save as ~/Pictures/$f]] }" | awesome-client; mv $f ~/Pictures/']=])
     end),
 
   awful.key({ altkey }, "Print",
     function ()
-      awful.util.spawn_with_shell "/usr/bin/scrot -u -e 'mv $f ~/Pictures/'";
-
-      naughty.notify {
-        title = 'Scrot Done !';
-        text  = 'Save file into ~/Pictures/';
-      }
+      awful.util.spawn_with_shell([=[/usr/bin/scrot -u -e 'echo "require [[naughty]][ [[notify]] ] ]=]
+        .. [=[ { title = [[Scrot Done!]]; text = [[Save as ~/Pictures/$f]] }" | awesome-client; mv $f ~/Pictures/']=])
     end),
 
 
@@ -271,12 +302,19 @@ globalkeys = awful.util.table.join(
   awful.key({ modkey, "Shift" }, "q", awesome.quit),
 
   -- Prompt
-  awful.key({ modkey }, "r", function () mypromptbox[mouse.screen]:run() end),
+  awful.key({ modkey }, "r",
+    function ()
+      mypromptbox[mouse.screen]:run {
+        prompt = ' Shell >> ';
+      }
+    end),
 
   awful.key({ modkey }, "x",
     function ()
       awful.prompt.run(
-        { prompt = ' Lua >> ' },
+        {
+          prompt = ' Lua >> ';
+        },
         mypromptbox[mouse.screen].widget,
         awful.util.eval,
         nil,
@@ -368,7 +406,13 @@ awful.rules.rules = {
 -- {{{ Signals
 client.connect_signal("manage",
   function (c, startup)
-    c.size_hints_honor = false
+    if c.class == 'gvim' or c.class == 'Gvim' then
+      c.size_hints_honor = true
+    else
+      c.size_hints_honor = false
+    end
+
+
 
     -- Sloppy focus
     c:connect_signal("mouse::enter",
@@ -391,21 +435,34 @@ client.connect_signal("manage",
     end
   end)
 
-client.connect_signal("focus",   function (c) c.border_color = beautiful.border_focus end)
+client.connect_signal("focus",   function (c) c.border_color = beautiful.border_focus  end)
 client.connect_signal("unfocus", function (c) c.border_color = beautiful.border_normal end)
 -- }}}
 
 -- {{{ Auto cmd
 do
+  local run_once = function (cmd)
+    findme = cmd
+    firstspace = cmd:find ' '
+    if firstspace then
+      findme = cmd:sub(0, firstspace - 1)
+    end
+
+    awful.util.spawn_with_shell(
+      'pgrep -u $USER -x ' .. findme
+      .. ' > /dev/null || (' .. cmd .. ')')
+  end
+
   local cmds = {
     'xfsettingsd &';
     'xcompmgr -Ss -n -Cc -fF -I-10 -O-10 -D1 -t-3 -l-4 -r4 &';
-    'nm-applet &';
+    'pkill nm-applet; nm-applet &';
+    -- 'moc-tray &';
     'fcitx &';
     'xset -b';
   }
 
-  for _,i in pairs(cmds) do awful.util.spawn(i) end
+  for _,i in ipairs(cmds) do awful.util.spawn_with_shell(i) end
 end
 -- }}}
 

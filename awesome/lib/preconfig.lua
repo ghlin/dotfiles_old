@@ -1,12 +1,7 @@
 local beautiful = require 'beautiful'
 local awful     = require 'awful'
-
-
-require 'awful.autofocus'
-
-local rules     = require 'awful.rules'
-
-awful.rules = rules
+awful.rules     = require 'awful.rules'
+local _         = require 'awful.autofocus'
 
 beautiful.init(awful.util.getdir 'config'  .. '/themes/numix/theme.lua')
 
@@ -23,10 +18,10 @@ local naughty   = require 'naughty'
 naughty.config.defaults.timeout       = 5
 naughty.config.defaults.screen        = 1
 naughty.config.defaults.position      = 'top_right'
-naughty.config.defaults.margin        = 8
+naughty.config.defaults.margin        = 12
 naughty.config.defaults.gap           = 1
 naughty.config.defaults.ontop         = true
-naughty.config.defaults.font          = 'Simsun 10'
+naughty.config.defaults.font          = 'Terminus 9'
 naughty.config.defaults.icon          = nil
 naughty.config.defaults.icon_size     = 256
 naughty.config.defaults.fg            = fg_tooltip

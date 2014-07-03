@@ -1,7 +1,10 @@
+finish
+
 let g:src_types = ['c', 'cpp', 'cc', 'lua', 'vim', 'python', 'markdown',
       \            'asm', 'progress', 'java', 'javascript', 'sh', 'dosbatch',
       \            'xf86conf',
       \            'vim']
+
 let g:use_marker = ['vim', 'lua', 'python', 'sh', 'dosbatch', 'xf86conf']
 
 function! SettingsForSourceCode()
@@ -22,6 +25,4 @@ function! SourceCodeDetect()
 endfunction
 
 autocmd BufEnter,BufRead  *     call SourceCodeDetect()
-
-autocmd BufEnter,BufRead  *.php set ft=html
 

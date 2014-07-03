@@ -1,6 +1,6 @@
 " auto set makeprg
 
-let g:default_cc_system = 'GCC'
+let g:default_compiler = 'GCC'
 
 function! Makeprg_init()
   let need_do_init = !exists('b:makeprg_loaded')
@@ -17,7 +17,7 @@ function! Makeprg_init()
     let b:makeprg_enabled = 1
     let b:makeprg_loaded  = 1
 
-    let b:cc_system = g:default_cc_system
+    let b:compiler = g:default_compiler
 
     let b:makeprg_user_defined_makeprg = "make"
     let b:makeprg_user_defined         = 0
@@ -29,16 +29,16 @@ function! Makeprg_init()
 endfunction
 
 function! Makeprg_check_cc()
-  if b:cc_system == 'GCC'
+  if b:compiler == 'GCC'
     let b:cc = 'gcc'
     let b:cx = 'g++'
-  elseif b:cc_system == 'CLANG'
+  elseif b:compiler == 'CLANG'
     let b:cc = 'clang'
     let b:cx = 'clang++'
   endif
 endfunction
 
-function! Makeprg_check_filetype()
+function! Makeprg_check_compiler()
   if &ft == 'c'
     let b:c = b:cc
     let b:f = b:ccflags
@@ -74,9 +74,9 @@ function! Makeprg_update()
     return
   endif
 
-  if !exists('b:cached')
-    let b:cached = 1
-    call Makeprg_cache()
+  if !exists('b:makeprg_builded')
+    let b:makeprg_builded = 1
+    call Makeprg_build_makeprg()
   endif
 
   if b:makeprg_enabled
@@ -84,8 +84,8 @@ function! Makeprg_update()
   endif
 endfunction
 
-function! Makeprg_cache()
-  call Makeprg_check_filetype()
+function! Makeprg_build_makeprg()
+  call Makeprg_check_compiler()
 
   let b:common = b:c . '\ ' . expand('%') . '\ -o\ ' . expand('%:p:r') . '.run'
 
@@ -118,25 +118,25 @@ nmap <leader>e    :!%:p:r.run<CR>
 
 function! Makeprg_add_flag(flag)
   call insert(b:f, a:flag)
-  call Makeprg_cache()
+  call Makeprg_build_makeprg()
   call Makeprg_update()
 endfunction
 
 function! Makeprg_add_incpath(path)
   call insert(b:incpath, a:path)
-  call Makeprg_cache()
+  call Makeprg_build_makeprg()
   call Makeprg_update()
 endfunction
 
 function! Makeprg_add_libpath(path)
   call insert(b:libpath, a:path)
-  call Makeprg_cache()
+  call Makeprg_build_makeprg()
   call Makeprg_update()
 endfunction
 
 function! Makeprg_add_lib(lib)
   call insert(b:libs, a:lib)
-  call Makeprg_cache()
+  call Makeprg_build_makeprg()
   call Makeprg_update()
 endfunction
 
@@ -150,13 +150,20 @@ function! Makeprg_toggle()
   endif
 endfunction
 
-command! -nargs=1 MkIncpath             call Makeprg_add_incpath('<args>')
-command! -nargs=1 MkLibpath             call Makeprg_add_libpath('<args>')
-command! -nargs=1 MkLib                 call Makeprg_add_lib('<args>')
-command! -nargs=0 MkIncThis             call Makeprg_add_incpath('%:h')
-command! -nargs=1 MkFlag                call Makeprg_add_flag('<args>')
-command! -nargs=0 MkToggle              call Makeprg_toggle()
-command! -nargs=1 MkCustom              call Makeprg_user_defined('<args>')
-command! -nargs=0 MkAuto                call Makeprg_auto()
-command! -nargs=0 MkUser                call Makeprg_user()
+function! CFlag(A, L, C)
+  " test command -complete=xxx
+  return ['-rdynamic', '-shared', '-c']
+endfunction
+
+
+
+command! -nargs=1 -complete=dir              MkIncpath  call Makeprg_add_incpath('<args>')
+command! -nargs=1 -complete=dir              MkLibpath  call Makeprg_add_libpath('<args>')
+command! -nargs=1                            MkLib      call Makeprg_add_lib('<args>')
+command! -nargs=0                            MkIncThis  call Makeprg_add_incpath('%:h')
+command! -nargs=1 -complete=customlist,CFlag MkFlag     call Makeprg_add_flag('<args>')
+command! -nargs=0                            MkToggle   call Makeprg_toggle()
+command! -nargs=1                            MkCustom   call Makeprg_user_defined('<args>')
+command! -nargs=0                            MkAuto     call Makeprg_auto()
+command! -nargs=0                            MkUser     call Makeprg_user()
 

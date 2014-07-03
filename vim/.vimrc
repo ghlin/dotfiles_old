@@ -94,7 +94,6 @@ function! LoadPlugins() "{{{
     let g:clang_complete_auto     = 0
     let g:clang_snippets          = 1
     let g:clang_snippets_engine   = 'ultisnips'
-    " let g:clang_snippets_engine   = 'clang_complete'
     let g:clang_hl_errors         = 0
     let g:clang_complete_macros   = 1
     let g:clang_complete_patterns = 1
@@ -105,9 +104,9 @@ function! LoadPlugins() "{{{
   " }}}
 
   " {{{ startify   a pretty welcome screen
-  " Bundle 'mhinz/vim-startify'
-  " let g:startify_files_number = 6
-  " let g:startify_bookmarks = [ '~/.vimrc', '~/.zshrc' ]
+    Bundle 'mhinz/vim-startify'
+    let g:startify_files_number = 10
+    let g:startify_bookmarks    = [ '~/.vimrc', '~/.zshrc', '~/.config/awesome/rc.lua' ]
   " }}}
 
   " {{{ tablify   generate tables
@@ -120,14 +119,15 @@ function! LoadPlugins() "{{{
         \ 'R'  : 'R', 'c'  : 'C', 'v'  : 'V', 'V'  : 'V',
         \ '' : 'V', 's'  : 'S', 'S'  : 'S', '' : 'S', }
 
-    if !exists('g:airline_symbols')
-      let g:airline_symbols = {}
-    endif
 
     let g:airline_left_sep           = ''
     let g:airline_left_alt_sep       = '|'
     let g:airline_right_sep          = ''
     let g:airline_right_alt_sep      = '|'
+
+    if !exists('g:airline_symbols')
+      let g:airline_symbols = {}
+    endif
 
     let g:airline_symbols.paste      = '[P]'
     let g:airline_symbols.whitespace = '[!]'
@@ -148,12 +148,12 @@ function! LoadPlugins() "{{{
     endfunction
 
     let g:airline_section_b =
-          \   '%{airline#util#wrap(Face(),0)}'
+         \   '%{airline#util#wrap(Face(),0)}'
 
-    "let g:airline_section_x =
-    "      \   '%{airline#util#prepend(airline#extensions#tagbar#currenttag(),0)}'
-    "      \ . '%{airline#util#prepend(BufNr(),0)}'
-    "      \ . '%{airline#util#wrap(airline#parts#filetype(),0)}'
+    " let g:airline_section_x =
+    "       \   '%{airline#util#prepend(airline#extensions#tagbar#currenttag(),0)}'
+    "       \ . '%{airline#util#prepend(BufNr(),0)}'
+    "       \ . '%{airline#util#wrap(airline#parts#filetype(),0)}'
 
     " exclude `currenttag'
     let g:airline_section_x =
@@ -163,16 +163,19 @@ function! LoadPlugins() "{{{
     let g:airline_section_y =
           \   '%{airline#util#prepend(airline#parts#ffenc(),0)}'
 
-    let g:airline#extensions#tagbar#enabled           = 0
+    let g:airline#extensions#tagbar#enabled              = 0
+    let g:airline#extensions#branch#enabled              = 1
+    let g:airline#extensions#branch#displayed_head_limit = 10
 
-    let g:airline#extensions#tabline#enabled          = 0
+    let g:airline#extensions#tabline#enabled             = 0
+
 "    let g:airline#extensions#tabline#left_sep         = g:airline_left_sep
 "    let g:airline#extensions#tabline#right_sep        = g:airline_right_sep
 "    let g:airline#extensions#tabline#show_buffers     = 1
 "    let g:airline#extensions#tabline#show_tab_nr      = 1
 "    let g:airline#extensions#tabline#buffer_min_count = 1
 
-    let g:airline_powerline_fonts                     = 0
+    let g:airline_powerline_fonts                     = 1
   " }}}
 
   " {{{ calutil (as DEP)
@@ -268,7 +271,7 @@ function! LoadPlugins() "{{{
   " }}}
 
   " {{{ vim-molokai
-    Bundle 'tomasr/molokai'
+  " Bundle 'tomasr/molokai'
   " }}}
 
   " {{{ rainbow_parentheses.vim for scheme
@@ -282,12 +285,14 @@ function! LoadPlugins() "{{{
   " }}}
 
   " {{{ vim-fugitive
-  " Bundle 'tpope/vim-fugitive'
+    Bundle 'tpope/vim-fugitive'
   " }}}
 
   " {{{ hsitz/VimOrganizer
-    let g:global_column_view = 1
     Bundle 'hsitz/VimOrganizer'
+
+    let g:global_column_view = 1
+    au BufEnter,BufRead *.org,todo,TODO set ft=org
   " }}}
 
   " {{{ NrrwRgn (DEP for VimOrganizer)
@@ -350,9 +355,11 @@ function! BasicSettings() "{{{
   set showmatch
   set matchtime  =4
 
+  set timeoutlen =300
+
   nnoremap \\ :nohl<CR>
 
-  command! -bang -nargs=? Q :echo "SHOU_DOU_NI_MA_BI!"
+  command! -bang -nargs=? Q :echo "手抖你麻痹啊"
 
   " path
   set path^=~/include,.,.. " this makes completion slow
@@ -383,6 +390,11 @@ function! BasicSettings() "{{{
 
   " toggle spell
   function! ToggleSpell()
+    if !has("spell")
+      echo "require spell"
+      return
+    endif
+
     let &spell = !&spell
     if &spell == 1
       echo "enable Spell Checking"
@@ -434,8 +446,8 @@ function! BasicSettings() "{{{
 
     set cc=81
     while i != 200
-      let &cc=&cc . ',' . i
-      let i=i+1
+      let &cc = &cc . ',' . i
+      let i   = i + 1
     endwhile
   endif
 
@@ -488,6 +500,11 @@ function! BasicSettings() "{{{
 
   com! -nargs=0 YDCV          :call YDCVFromInput()
 
+  if has('gui_running')
+    set keywordprg         =ydcv\ --color=never
+  else
+    set keywordprg         =ydcv
+  endif
 
   " <C-R>=ExecPipe('colo') ==> solarized
   function! ExecPipe(cmd)
@@ -510,8 +527,6 @@ function! GuiSettings() "{{{
   set guicursor  ^=r-cr:hor1-Cursor/lCursor
   set guicursor  ^=sm:block-Cursor-blinkwait75-blinkoff55-blinkon55
 
-  colorscheme termcolor
-
   if $DESKTOP_SESSION == "kde-plasma"
     " no-runtime icon when in kde-plasma DE
     set guioptions    =cf
@@ -521,8 +536,10 @@ function! GuiSettings() "{{{
 
   com! -nargs=0 Demode :call Demode()
 
-  set guifont     =Simsun\ 10
-  set gfw         =Simsun\ 10
+  set guifont     =Consolas\ 11
+  set gfw         =Microsoft\ YaHei\ 11
+
+  colorscheme      numix
 
   set mouse       =
 endfunction "}}}
@@ -530,16 +547,14 @@ endfunction "}}}
 function! TermSettings() "{{{
   if $TERM == "xterm"
     set t_Co=256
-    let g:airline_theme = 'monochrome'
-    colorscheme termcolor
   else
     set t_Co=8
-    colorscheme termcolor
+    let &t_SI = "\<Esc>[?6;13;0;c"
+    let &t_EI = "\<Esc>[?16;13;0;c"
   endif
 
-"  set t_ti=
-"  set t_te=
-"  set t_vb=
+  let g:airline_theme = 'monochrome'
+  colorscheme      numix
 
   set title
   set termencoding=utf-8

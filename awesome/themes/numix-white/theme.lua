@@ -8,21 +8,21 @@ theme.tasklist_disable_icon = true
 -- }}}
 
 -- {{{ Colors
-theme.fg_tooltip    = '#dedede'
+theme.fg_tooltip    = '#2d2d2d'
 
-theme.fg_em         = '#dedede'
+theme.fg_em         = '#2d2d2d'
 
-theme.bg_normal     = '#2d2d2d'
-theme.bg_focus      = '#2d2d2d'
+theme.bg_normal     = '#ffffff'
+theme.bg_focus      = '#ffffff'
 theme.bg_urgent     = '#ff0000'
-theme.bg_minimize   = '#2d2d2d'
+theme.bg_minimize   = '#ffffff'
 
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = '#dedede'
+theme.fg_normal     = '#2d2d2d'
 theme.fg_focus      = '#d63937'
 theme.fg_urgent     = '#ff0000'
-theme.fg_minimize   = '#eeeeee'
+theme.fg_minimize   = '#4d4d4d'
 
 theme.border_width  = '0'
 theme.border_normal = '#000000'
@@ -73,4 +73,5 @@ theme.layout_floating   = awful.util.getdir 'config' .. '/themes/shared/icons/fl
 -- }}}
 
 return theme
+
 
