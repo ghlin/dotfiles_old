@@ -3,7 +3,10 @@ local awful     = require 'awful'
 awful.rules     = require 'awful.rules'
 local _         = require 'awful.autofocus'
 
-beautiful.init(awful.util.getdir 'config'  .. '/themes/numix/theme.lua')
+
+local theme = os.getenv 'AWESOME_THEME' or 'numix'
+
+beautiful.init(awful.util.getdir 'config'  .. '/themes/' .. theme .. '/theme.lua')
 
 -- {{{ Variables
 terminal   = 'terminator'

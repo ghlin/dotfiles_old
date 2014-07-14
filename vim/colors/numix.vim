@@ -11,11 +11,11 @@ let colors_name = "numix"
 " #5E5E5E #EF2929 #00D30D #FCE94F #0077FF #B75FAD #34E2E2 #FFFFFF
 
 if has("gui_running")
-  hi Normal           gui=none            guifg=#DEDEDE           guibg=#2D2D2D
+  hi Normal           gui=none            guifg=#FFFFFF           guibg=#2D2D2D
   hi Comment          gui=italic          guifg=#029004
   hi Constant         gui=none            guifg=#5E5E5E
-  hi DiffAdd                              guibg=#0040ED
-  hi DiffChange                           guibg=#8D00A4
+  hi DiffAdd                                                      guibg=#0040ED
+  hi DiffChange                                                   guibg=#8D00A4
   hi DiffDelete                           guifg=#0077FF           guibg=#34E2E2
   hi DiffText                                                     guibg=#EF2929
   hi Directory                            guifg=#0040ED
@@ -24,7 +24,7 @@ if has("gui_running")
   hi Folded                               guifg=#5E5E5E           guibg=bg
   hi Identifier       gui=none            guifg=#0040ED
   hi IncSearch        gui=reverse
-  hi MatchParen       gui=underline       guifg=#0040ED           guibg=bg
+  hi MatchParen       gui=none            guifg=#0040ED           guibg=bg
   hi ModeMsg          gui=bold
   hi MoreMsg          gui=bold            guifg=#029004
   hi NonText                              guifg=#FFFFFF
@@ -34,13 +34,13 @@ if has("gui_running")
   hi PreProc          gui=none            guifg=#029004
   hi Question                             guifg=#029004
   hi Search                               guifg=#FFFFFF           guibg=#EF2929
-  hi Special          gui=none            guifg=#EF2929
+  hi Special          gui=none            guifg=#0040ED
   hi SpecialKey                           guifg=#0040ED
   hi Statement        gui=bold            guifg=#0077FF
   hi TabLine          gui=none                                    guibg=bg
   hi TabLineFill      gui=none
   hi TabLineSel       gui=bold            guifg=#FFFFFF           guibg=#5E5E5E
-  hi Title                                guifg=#EF2929
+  hi Title                                guifg=#0040ED
   hi Todo             gui=underline,bold  guifg=#EF2929           guibg=bg
   hi Type             gui=bold            guifg=#0077FF
   hi VertSplit        gui=none            guifg=#0077FF           guibg=bg
@@ -71,8 +71,8 @@ if has("gui_running")
 else
   hi  Comment          cterm=none            ctermfg=DarkGreen
   hi  Constant         cterm=none            ctermfg=DarkGray
-  hi  DiffAdd                                ctermbg=LightBlue
-  hi  DiffChange                             ctermbg=LightMagenta
+  hi  DiffAdd                                                           ctermbg=LightBlue
+  hi  DiffChange                                                        ctermbg=LightMagenta
   hi  DiffDelete                             ctermfg=Blue               ctermbg=LightCyan
   hi  DiffText                                                          ctermbg=Red
   hi  Directory                              ctermfg=DarkBlue
@@ -81,7 +81,7 @@ else
   hi  Folded                                 ctermfg=DarkGray           ctermbg=none
   hi  Identifier       cterm=none            ctermfg=DarkBlue
   hi  IncSearch        cterm=reverse
-  hi  MatchParen       cterm=underline       ctermfg=DarkBlue           ctermbg=none
+  hi  MatchParen       cterm=none            ctermfg=DarkBlue           ctermbg=none
   hi  ModeMsg          cterm=bold
   hi  MoreMsg                                ctermfg=DarkGreen
   hi  NonText                                ctermfg=White
@@ -90,13 +90,13 @@ else
   hi  PreProc          cterm=none            ctermfg=DarkGreen
   hi  Question                               ctermfg=DarkGreen
   hi  Search                                 ctermfg=White              ctermbg=Red
-  hi  Special          cterm=none            ctermfg=LightRed
+  hi  Special          cterm=none            ctermfg=DarkBlue
   hi  SpecialKey                             ctermfg=DarkBlue
   hi  Statement        cterm=bold            ctermfg=Blue
   hi  TabLine          cterm=none                                       ctermbg=none
   hi  TabLineFill      cterm=none
   hi  TabLineSel       cterm=bold            ctermfg=White              ctermbg=DarkGray
-  hi  Title                                  ctermfg=DarkMagenta
+  hi  Title                                  ctermfg=DarkBlue
   hi  Todo             cterm=underline,bold  ctermfg=Red                ctermbg=none
   hi  Type             cterm=none            ctermfg=Blue
   hi  Visual           cterm=reverse                                    ctermbg=none

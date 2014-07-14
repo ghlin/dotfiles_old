@@ -55,7 +55,6 @@ end
 
 -- {{{ Tags
 do
-  -- local names  = { "１", "２", "⑨", "☯" }
   local names  = { ' Term', ' Term', ' Dev', ' WWW', ' FM', ' Daily' }
   local layout = {}
   local icons  = {}
@@ -199,10 +198,6 @@ for s = 1, screen.count() do
   right_wibox:add(widgets.arrl)
   right_wibox:add(widgets.space_sep)
 
---  right_wibox:add(widgets.uptime_icon)
---  right_wibox:add(widgets.uptime)
---  widgets.spaced_arrl(right_wibox)
-
   right_wibox:add(widgets.volume_icon)
   right_wibox:add(widgets.volume)
   widgets.spaced_arrl(right_wibox)
@@ -217,6 +212,7 @@ for s = 1, screen.count() do
   end
 
   right_wibox:add(widgets.clock_icon)
+  right_wibox:add(widgets.space_sep)
   right_wibox:add(widgets.textclock)
 
   local wibox_layout = wibox.layout.align.horizontal()
@@ -274,12 +270,12 @@ globalkeys = awful.util.table.join(
 
 
   -- Media key
-  awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn 'amixer sset Master,0 5%-'  end),
-  awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn 'amixer sset Master,0 5%+'  end),
-  awful.key({ }, "XF86AudioMute",        function () awful.util.spawn 'amixer sset Master toggle' end),
-  awful.key({ }, "XF86AudioPlay",        function () awful.util.spawn 'mocp --toggle-pause'       end),
-  awful.key({ }, "XF86AudioNext",        function () awful.util.spawn 'mocp --next'               end),
-  awful.key({ }, "XF86AudioPrev",        function () awful.util.spawn 'mocp --previous'           end),
+  awful.key({ modkey }, "XF86AudioLowerVolume", function () awful.util.spawn 'amixer sset Master,0 5%-'  end),
+  awful.key({ modkey }, "XF86AudioRaiseVolume", function () awful.util.spawn 'amixer sset Master,0 5%+'  end),
+  awful.key({ modkey }, "XF86AudioMute",        function () awful.util.spawn 'amixer sset Master toggle' end),
+  awful.key({ modkey }, "XF86AudioPlay",        function () awful.util.spawn 'mocp --toggle-pause'       end),
+  awful.key({ modkey }, "XF86AudioNext",        function () awful.util.spawn 'mocp --next'               end),
+  awful.key({ modkey }, "XF86AudioPrev",        function () awful.util.spawn 'mocp --previous'           end),
 
   awful.key({ }, "Print",
     function ()
@@ -289,15 +285,15 @@ globalkeys = awful.util.table.join(
 
   awful.key({ altkey }, "Print",
     function ()
-      awful.util.spawn_with_shell([=[/usr/bin/scrot -u -e 'echo "require [[naughty]][ [[notify]] ] ]=]
+      awful.util.spawn_with_shell([=[/usr/bin/scrot -s -b -e 'echo "require [[naughty]][ [[notify]] ] ]=]
         .. [=[ { title = [[Scrot Done!]]; text = [[Save as ~/Pictures/$f]] }" | awesome-client; mv $f ~/Pictures/']=])
     end),
 
 
   -- Standard program
   awful.key({ modkey }, "Return", function () awful.util.spawn(terminal) end),
-
   awful.key({ modkey }, "g",      function () awful.util.spawn 'thunar'  end),
+  awful.key({ modkey }, "v",      function () awful.util.spawn 'gvim'    end),
 
   awful.key({ modkey, "Shift" }, "q", awesome.quit),
 
@@ -456,8 +452,6 @@ do
   local cmds = {
     'xfsettingsd &';
     'xcompmgr -Ss -n -Cc -fF -I-10 -O-10 -D1 -t-3 -l-4 -r4 &';
-    'pkill nm-applet; nm-applet &';
-    -- 'moc-tray &';
     'fcitx &';
     'xset -b';
   }

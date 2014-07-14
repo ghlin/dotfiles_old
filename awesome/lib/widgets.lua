@@ -19,7 +19,7 @@ local imagebox_from_beautiful = function (item)
 end
 
 local coloured = function (text, colour)
-  colour = colour or 'white'
+  colour = colour or beautiful.fg_normal:sub(1, 7)
   return '<span foreground="' .. colour .. '">' .. text .. '</span>'
 end
 
@@ -91,11 +91,11 @@ local volume_icon = imagebox_from_beautiful 'volume'
 
 -- Buttons
 local volume_listener = awful.util.table.join(
-  awful.button({ }, 1,
+  awful.button({ "mod4" }, 1,
     function () awful.util.spawn_with_shell 'amixer sset Master toggle' end),
-  awful.button({ }, 4,
+  awful.button({ "mod4" }, 4,
     function () awful.util.spawn_with_shell 'amixer sset Master,0 5%+'  end),
-  awful.button({ }, 5,
+  awful.button({ "mod4" }, 5,
     function () awful.util.spawn_with_shell 'amixer sset Master,0 5%-'  end)
 )
 
@@ -119,7 +119,7 @@ vicious.register(battery, vicious.widgets.bat,
     bat_charge = args[2]
     bat_time   = args[3]
 
-    if bat_state == "−" and bat_charge < 3 then
+    if bat_state == "−" and bat_charge < 10 then
       awful.util.spawn_with_shell 'pm-hibernate'
     end
 
@@ -128,7 +128,7 @@ vicious.register(battery, vicious.widgets.bat,
     if bat_charge < 20 then
       bat_color = 'red'
     else
-      bat_color = 'white'
+      bat_color = beautiful.fg_normal:sub(1, 7)
     end
 
     return ' ' .. coloured(bat_charge .. '%', bat_color)

@@ -2,21 +2,8 @@ ZSH=/usr/share/oh-my-zsh/
 
 DISABLE_AUTO_UPDATE="true"
 
-# if [ "$TERM" = "xterm" ]; then
-#   ZSH_THEME="xc-tama"
-# else
-#   ZSH_THEME="blinks"
-# fi
+ZSH_THEME="gotcha"
 
-ZSH_THEME="vgrml-arrow"
-
-# CASE_SENSITIVE="true"
-# COMPLETION_WAITING_DOTS="true"
-# DISABLE_AUTO_TITLE="true"
-# DISABLE_CORRECTION="true"
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# plugins=(rails git textmate ruby lighthouse)
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
@@ -37,18 +24,16 @@ alias  random-seq="uuidgen| cut -b 1-8"
 alias  scrot="scrot -e 'mv \$f $HOME/Pictures'"
 
 # awesome background
-export AWESOME_BG="$HOME/Pictures/dontpanic.png"
+export AWESOME_BG="$HOME/Pictures/cat.jpg"
+export AWESOME_THEME='numix'
 
 
 # default editor (for yaourt)
 export EDITOR=vim
 
-# completion
-# fpath=(~/.zsh/completion/ $fpath)
-# compinit
 
 # Fontconfig-Infinality
-export INFINALITY_FT_FILTER_PARAMS="20 20 30 20 20"
+export INFINALITY_FT_FILTER_PARAMS="10 25 35 25 10"
 export INFINALITY_FT_CONTRAST="60"
 
 # color gcc output
@@ -60,5 +45,9 @@ mount-ntfs() {
   else
     sudo mount $1 $2 -o iocharset=utf8,umask=000
   fi
+}
+
+x11grab() {
+  ffmpeg -f x11grab -r 25 -s 1366x768 -i :0.0 -vcodec libx264 -threads 0 -preset ultrafast ~/Videos/video.mkv
 }
 

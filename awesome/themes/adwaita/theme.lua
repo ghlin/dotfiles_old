@@ -8,21 +8,21 @@ theme.tasklist_disable_icon = true
 -- }}}
 
 -- {{{ Colors
-theme.fg_tooltip    = '#2d2d2d'
+theme.fg_tooltip    = '#dedede'
 
-theme.fg_em         = '#2d2d2d'
+theme.fg_em         = '#000000'
 
-theme.bg_normal     = '#dedede'
-theme.bg_focus      = '#dedede'
-theme.bg_urgent     = '#ff0000'
-theme.bg_minimize   = '#dedede'
+theme.bg_normal     = '#ededed'
+theme.bg_focus      = '#ededed'
+theme.bg_urgent     = '#ff6666'
+theme.bg_minimize   = '#ededed'
 
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = '#2d2d2d'
-theme.fg_focus      = '#d63937'
-theme.fg_urgent     = '#ff0000'
-theme.fg_minimize   = '#4d4d4d'
+theme.fg_normal     = '#000000'
+theme.fg_focus      = '#0000ff'
+theme.fg_urgent     = '#ffffff'
+theme.fg_minimize   = '#454545'
 
 theme.border_width  = '0'
 theme.border_normal = '#000000'

@@ -9,8 +9,9 @@ function! Makeprg_init()
     let b:libpath = ['.', '/home/$USER/lib']
     let b:incpath = ['/home/$USER/include']
 
-    let b:libs = []
-    let b:flags = ['-Wall', '-Werror']
+    " freq-used
+    let b:libs = ['pthread', 'lua', 'dl']
+    let b:flags = ['-Wall', '-Werror', '-g']
     let b:ccflags = ['-std=gnu99']
     let b:cxflags = ['-std=gnu++11']
 
