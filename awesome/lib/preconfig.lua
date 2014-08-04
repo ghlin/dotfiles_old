@@ -24,13 +24,13 @@ naughty.config.defaults.position      = 'top_right'
 naughty.config.defaults.margin        = 12
 naughty.config.defaults.gap           = 1
 naughty.config.defaults.ontop         = true
-naughty.config.defaults.font          = 'Terminus 9'
-naughty.config.defaults.icon          = nil
+naughty.config.defaults.font          = 'envypn 9'
+naughty.config.defaults.icon          = beautiful.naughty
 naughty.config.defaults.icon_size     = 256
 naughty.config.defaults.fg            = fg_tooltip
 naughty.config.defaults.bg            = bg_tooltip
 naughty.config.defaults.border_color  = border_tooltip
-naughty.config.defaults.border_width  = 1
+naughty.config.defaults.border_width  = 0
 naughty.config.defaults.hover_timeout = nil
 -- }}}
 

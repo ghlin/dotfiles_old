@@ -1,0 +1,67 @@
+[global_config]
+  inactive_color_offset = 1.0
+[keybindings]
+[profiles]
+  [[default]]
+    scrollbar_position = hidden
+    palette = "#000000:#b11400:#029004:#dbd600:#0040ed:#a700c2:#007e80:#d4d4d4:#5e5e5e:#ef2929:#00d30d:#fce94f:#0077ff:#b75fad:#34e2e2:#ffffff"
+    background_image = None
+    background_darkness = 0.83
+    scrollback_lines = 2048
+    use_system_font = False
+    cursor_color = "#ffffff"
+    scroll_background = False
+    icon_bell = False
+    show_titlebar = False
+    font = PT Mono 11
+    background_color = "#2d2d2d"
+    foreground_color = "#ffffff"
+  [[Courier New]]
+    scrollbar_position = hidden
+    palette = "#000000:#b11400:#029004:#dbd600:#0040ed:#a700c2:#007e80:#d4d4d4:#5e5e5e:#ef2929:#00d30d:#fce94f:#0077ff:#b75fad:#34e2e2:#ffffff"
+    background_image = None
+    background_darkness = 0.83
+    scrollback_lines = 2048
+    use_system_font = False
+    cursor_color = "#ffffff"
+    scroll_background = False
+    icon_bell = False
+    show_titlebar = False
+    font = Courier New 10
+    background_color = "#2d2d2d"
+    foreground_color = "#ffffff"
+  [[ProFont]]
+    scrollbar_position = hidden
+    palette = "#000000:#b11400:#029004:#dbd600:#0040ed:#a700c2:#007e80:#d4d4d4:#5e5e5e:#ef2929:#00d30d:#fce94f:#0077ff:#b75fad:#34e2e2:#ffffff"
+    background_image = None
+    background_darkness = 0.83
+    scrollback_lines = 2048
+    use_system_font = False
+    cursor_color = "#ffffff"
+    scroll_background = False
+    icon_bell = False
+    show_titlebar = False
+    font = ProFont 11
+    background_color = "#2d2d2d"
+    foreground_color = "#ffffff"
+  [[Huge Font Tiny Term]]
+    scrollbar_position = hidden
+    palette = "#000000:#b11400:#029004:#dbd600:#0040ed:#8d00a4:#007e80:#d4d4d4:#5e5e5e:#ef2929:#00d30d:#fce94f:#0077ff:#b75fad:#34e2e2:#ffffff"
+    background_image = None
+    scrollback_lines = 2048
+    use_system_font = False
+    cursor_color = "#d0d0d0"
+    foreground_color = "#ffffff"
+    icon_bell = False
+    show_titlebar = False
+    font = PT Mono 17
+    background_color = "#2d2d2d"
+[layouts]
+  [[default]]
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+    [[[window0]]]
+      type = Window
+      parent = ""
+[plugins]

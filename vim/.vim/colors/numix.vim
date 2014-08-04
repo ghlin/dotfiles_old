@@ -12,7 +12,7 @@ let colors_name = "numix"
 
 if has("gui_running")
   hi Normal           gui=none            guifg=#FFFFFF           guibg=#2D2D2D
-  hi Comment          gui=italic          guifg=#029004
+  hi Comment          gui=none            guifg=#029004
   hi Constant         gui=none            guifg=#5E5E5E
   hi DiffAdd                                                      guibg=#0040ED
   hi DiffChange                                                   guibg=#8D00A4

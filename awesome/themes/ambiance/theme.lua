@@ -3,7 +3,7 @@ local awful     = require 'awful'
 -- {{{ Main
 theme                       = {}
 theme.wallpaper             = os.getenv 'AWESOME_BG' or os.getenv 'HOME' .. '/Pictures/air.jpg'
-theme.font                  = 'ProFont 8'
+theme.font                  = 'Terminus 8'
 theme.tasklist_disable_icon = true
 -- }}}
 
@@ -12,10 +12,10 @@ theme.fg_tooltip    = '#dedede'
 
 theme.fg_em         = '#dedede'
 
-theme.bg_normal     = '#2d2d2d'
-theme.bg_focus      = '#2d2d2d'
+theme.bg_normal     = '#3c3c3c'
+theme.bg_focus      = '#3c3c3c'
 theme.bg_urgent     = '#ff0000'
-theme.bg_minimize   = '#2d2d2d'
+theme.bg_minimize   = '#3c3c3c'
 
 theme.bg_systray    = theme.bg_normal
 
@@ -55,7 +55,6 @@ theme.thunar                = awful.util.getdir 'config'  .. '/themes/shared/ico
 theme.browser               = awful.util.getdir 'config'  .. '/themes/shared/icons/browser.svg'
 theme.terminal              = awful.util.getdir 'config'  .. '/themes/shared/icons/terminal.svg'
 theme.text_editor           = awful.util.getdir 'config'  .. '/themes/shared/icons/text-editor.svg'
-theme.naughty               = awful.util.getdir 'config'  .. '/themes/shared/icons/naughty.svg'
 -- }}}
 
 -- {{{ Layout

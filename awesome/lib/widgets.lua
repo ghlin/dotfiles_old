@@ -198,6 +198,8 @@ local update = function (w, screen)
   w:set_text('[' .. (layout or 'layout unknown') .. ']')
 end
 
+local font = require 'beautiful' ['font']
+
 local layoutbox = function (screen)
   local screen = screen or 1
   local w      = wibox.widget.textbox 'layout'
@@ -211,16 +213,16 @@ local layoutbox = function (screen)
   tag.attached_connect_signal(screen, "property::selected", update_on_tag_selection)
   tag.attached_connect_signal(screen, "property::layout", update_on_tag_selection)
 
-  w:set_font 'Terminus 8'
+  w:set_font(font)
   return w
 end
 
 for _, widget in ipairs { sep, mocp } do
-  widget:set_font(require 'beautiful' ['font'])
+  widget:set_font(font)
 end
 
 for _, widget in ipairs { uptime, textclock, battery, volume } do
-  widget:set_font 'Terminus 8'
+  widget:set_font(font)
 end
 
 return {

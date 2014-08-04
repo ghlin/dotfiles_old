@@ -1,0 +1,108 @@
+
+###########################################################################
+#                            TextMate Snippets                            #
+###########################################################################
+
+snippet hd "headsome" !b
+/*
+ * file       `!p snip.rv = snip.fn or "untitled"`
+ * author     ghlin <2012.2.9.ghl@gmail.com>
+ * date       `!v strftime("%Y %b %d - %X")`
+ * modified   `!v strftime("%Y %b %d - %X")`
+ * license    GPL
+ * brief      ${1:`!p snip.rv = snip.fn or "none"`}
+ */
+
+$0
+endsnippet
+
+snippet inc "#Include" !b
+#include <$1>
+$0
+endsnippet
+
+snippet main "main() (main)" !b
+
+int main(int argc, char **argv)
+{
+  ${1:/* code */}
+  return 0;
+}
+
+endsnippet
+
+
+snippet once "Include header once only guard"
+#ifndef ${1:__`!p
+if not snip.c:
+  import random, string
+  name = re.sub(r'[^A-Za-z0-9]+','_', snip.fn).upper()
+  rand = ''.join(random.sample(string.ascii_letters+string.digits, 8))
+  snip.rv = ('%s_%s' % (name,rand)).upper()
+else:
+    snip.rv = snip.c`__}
+#define $1
+
+${0}
+
+#endif // end of include guard: $1
+
+endsnippet
+
+snippet st "struct" !bs
+struct $1
+{
+  $0
+};
+endsnippet
+
+snippet todo "a todo reminder" !bs
+// ${1:TODO}(ghlin) : ${2:reminder} `!v strftime("%m %d - %X")`
+endsnippet
+
+snippet xxx "a xxx reminder" !bs
+// ${1:XXX}(ghlin) : ${2:reminder} `!v strftime("%m %d - %X")`
+endsnippet
+
+snippet fixme "a fixme reminder" !bs
+// ${1:FIXME}(ghlin) : ${2:reminder} `!v strftime("%m %d - %X")`
+endsnippet
+
+snippet brief "doxygen with @brief" !bs
+/**
+ * @brief $1
+ */
+$0
+endsnippet
+
+snippet comment "a nice comment" !bs
+/**
+ * $1
+ */
+$0
+endsnippet
+
+snippet "([^ 	])-" "->" !ir
+`!p snip.rv = match.group(1)`->$0
+endsnippet
+
+snippet " -" "x - x" !ir
+ - $0
+endsnippet
+
+snippet undef "undefine macro" !b
+#ifdef $1
+#undef $1
+#endif
+$0
+endsnippet
+
+snippet fff "folder region" !b
+// {{{ ${1:region description}
+$0
+// }}}
+endsnippet
+
+
+# vim:ft=snippets:
+

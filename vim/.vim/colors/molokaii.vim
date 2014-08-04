@@ -108,7 +108,8 @@ hi WarningMsg      guifg=#FFFFFF guibg=#333333 gui=bold
 hi WildMenu        guifg=#66D9EF guibg=#000000
 
 hi TabLine         guibg=#1B1D1E guifg=#808080 gui=none
-hi link TabLineFill TabLine
+hi clear TabLineFill
+hi link  TabLineFill     TabLine
 " Support for 256-color terminal
 "
 if &t_Co > 255

@@ -89,7 +89,7 @@ mymainmenu = awful.menu {
     { "Awesome",      myawsomemenu, beautiful.awesome_icon };
     { "Browser",      "chromium",   beautiful.browser      };
     { "Text Editor",  "gvim",       beautiful.text_editor  };
-    { "File Manager", "thunar",     beautiful.thunar       };
+    { "File Manager", "pcmanfm",    beautiful.thunar       };
     { "Terminal",     terminal,     beautiful.terminal     };
   }
 }
@@ -280,19 +280,19 @@ globalkeys = awful.util.table.join(
   awful.key({ }, "Print",
     function ()
       awful.util.spawn_with_shell([=[/usr/bin/scrot -e 'echo "require [[naughty]][ [[notify]] ] ]=]
-        .. [=[ { title = [[Scrot Done!]]; text = [[Save as ~/Pictures/$f]] }" | awesome-client; mv $f ~/Pictures/']=])
+        .. [=[ { title = [[Scrot Done!]]; text = [[Saved as ~/Pictures/$f]] }" | awesome-client; mv $f ~/Pictures/']=])
     end),
 
   awful.key({ altkey }, "Print",
     function ()
       awful.util.spawn_with_shell([=[/usr/bin/scrot -s -b -e 'echo "require [[naughty]][ [[notify]] ] ]=]
-        .. [=[ { title = [[Scrot Done!]]; text = [[Save as ~/Pictures/$f]] }" | awesome-client; mv $f ~/Pictures/']=])
+        .. [=[ { title = [[Scrot Done!]]; text = [[Saved as ~/Pictures/$f]] }" | awesome-client; mv $f ~/Pictures/']=])
     end),
 
 
   -- Standard program
   awful.key({ modkey }, "Return", function () awful.util.spawn(terminal) end),
-  awful.key({ modkey }, "g",      function () awful.util.spawn 'thunar'  end),
+  awful.key({ modkey }, "g",      function () awful.util.spawn 'pcmanfm' end),
   awful.key({ modkey }, "v",      function () awful.util.spawn 'gvim'    end),
 
   awful.key({ modkey, "Shift" }, "q", awesome.quit),
