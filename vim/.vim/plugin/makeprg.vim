@@ -6,8 +6,8 @@ function! Makeprg_init()
   let need_do_init = !exists('b:makeprg_loaded')
 
   if need_do_init
-    let b:libpath = ['.', '/home/$USER/lib']
-    let b:incpath = ['/home/$USER/include']
+    let b:libpath = ['.', '/home/$USER/lib', '/home/$USER/.local/lib']
+    let b:incpath = ['/home/$USER/include', '/home/$USER/.local/include']
 
     " freq-used
     let b:libs = ['pthread', 'lua', 'dl']

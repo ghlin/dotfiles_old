@@ -14,9 +14,10 @@ source $ZSH/oh-my-zsh.sh
 # into ZSH_PLUGIN_DIR and add it to plugins
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-export PATH="$PATH:$HOME/bin/"
+export PATH="$PATH:$HOME/.local/bin/"
+export MY_GIT_REPO="/media/data/.gitrepo/"
 
-alias  gfw-me-not="source ~/lib/cgfw.sh"
+alias  gfw-me-not="source ~/.local/lib/cgfw.sh"
 alias  update-my-archlinux="yaourt -Syua"
 alias  yaourt-Syua="yaourt -Syua"
 alias  start-httpd="sudo systemctl start httpd"
@@ -26,13 +27,12 @@ alias  scrot="scrot -e 'mv \$f $HOME/Pictures'"
 alias  mkdtdir="mkdir $(date +'%F-%H-%M-%S')"
 
 # awesome background
+#
 export AWESOME_BG="/home/ghlin/Pictures/dontpanic.png"
 export AWESOME_THEME='numix'
 
-
-# default editor (for yaourt)
+# default editor
 export EDITOR=vim
-
 
 # Fontconfig-Infinality
 export INFINALITY_FT_FILTER_PARAMS="20 20 30 20 20"
@@ -56,13 +56,11 @@ x11grab() {
   PREFIX="~/Videos/"
   FILENAME="`date +'x11grab-%F-%H-%M-%S.mkv'`"
   OUTPUT="$PREFIX/$FILENAME"
+  FFMPEG_CMD="ffmpeg $AUDIO_ARGS $VIDEO_ARGS $OUTPUT -stats"  # -v error"
 
   echo "VIDEO ARGS -> $VIDEO_ARGS"
   echo "AUDIO ARGS -> $AUDIO_ARGS"
   echo "OUTPUT     -> $OUTPUT"
-
-  FFMPEG_CMD="ffmpeg $AUDIO_ARGS $VIDEO_ARGS $OUTPUT -stats"  # -v error"
-
   echo "FFMPEG_CMD -> $FFMPEG_CMD"
 
   eval "$FFMPEG_CMD"

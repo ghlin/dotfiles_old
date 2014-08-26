@@ -7,32 +7,32 @@ function! LoadPlugins() "{{{
   set nocp
   filetype off
   set rtp +=~/.vim/bundle/vundle
-  call vundle#rc()
+  call vundle#begin()
 
 
   " Search END_OF_BUNDLE_LIST to seek to the end {{{
   " {{{ vundle
-    Bundle 'gmarik/vundle'
+    Plugin 'gmarik/vundle'
   " }}}
 
   " {{{ github-like color scheme
-  " Bundle 'github-theme'
+  " Plugin 'github-theme'
   " }}}
 
   " {{{ cpp-vim (c++11 highlighting)
-    Bundle 'vim-jp/cpp-vim'
+    Plugin 'vim-jp/cpp-vim'
   " }}}
 
   " {{{ cscope macros
-    Bundle 'cscope_macros.vim'
+    Plugin 'cscope_macros.vim'
   " }}}
 
   " {{{ L9 (as DEP)
-    Bundle 'L9'
+    Plugin 'L9'
   " }}}
 
   " {{{ CtrlP
-    Bundle 'kien/ctrlp.vim'
+    Plugin 'kien/ctrlp.vim'
     let g:ctrlp_map = '<leader>F'  " :CtrlP
     noremap <leader>R  :CtrlPMRUFiles<CR>
     noremap <leader>B  :CtrlPBuffer<CR>
@@ -50,31 +50,31 @@ function! LoadPlugins() "{{{
   " }}}
 
   " {{{ Easy Grep
-    Bundle 'EasyGrep'
+    Plugin 'EasyGrep'
   " }}}
 
   " {{{ VisIncr (vertical inc-some)
-    Bundle 'VisIncr'
+    Plugin 'VisIncr'
   " }}}
 
   " {{{ A.vim (switch between .c/.h)
-    Bundle 'a.vim'
+    Plugin 'a.vim'
   " }}}
 
   " {{{ argtextobj (text object of arguments)
-    Bundle 'argtextobj.vim'
+    Plugin 'argtextobj.vim'
   " }}}
 
   " {{{ vim-textobj-user AS-DEP(vim-textobj-indent)
-    Bundle 'kana/vim-textobj-user'
+    Plugin 'kana/vim-textobj-user'
   " }}}
 
   " {{{ vim-textobj-indent
-    Bundle 'kana/vim-textobj-indent'
+    Plugin 'kana/vim-textobj-indent'
   " }}}
 
   " {{{ vim-textobj-clang
-  " Bundle 'rhysd/vim-textobj-clang'
+  " Plugin 'rhysd/vim-textobj-clang'
   " let g:textobj_clang_mapping_kinds = [
   "       \ 'class', 'function', 'expression',
   "       \ 'statement', 'parameter', 'namespace',
@@ -84,27 +84,27 @@ function! LoadPlugins() "{{{
   " }}}
 
   " {{{ libclang-vim (AS DEP) (for vim-textobj-clang)
-  " Bundle 'rhysd/libclang-vim'
+  " Plugin 'rhysd/libclang-vim'
   " }}}
 
   " {{{ swap-parameters   swap two parameters
-    Bundle 'swap-parameters'
+    Plugin 'swap-parameters'
   " }}}
 
   " {{{ matchit  match anywhat
-    Bundle 'matchit.zip'
+    Plugin 'matchit.zip'
   " }}}
 
   " {{{ gtk-mode   stuffs writing gtk code(vala highlighting)
-  " Bundle 'gtk-mode'
+  " Plugin 'gtk-mode'
   " }}}
 
   " {{{ ReplaceWithRegister
-    Bundle 'ReplaceWithRegister'
+    Plugin 'ReplaceWithRegister'
   " }}}
 
   " {{{ UltiSnips
-    Bundle 'SirVer/ultisnips'
+    Plugin 'SirVer/ultisnips', { 'pinned' : 1 }
     " use py3: clang_complete [snippets engine not found]
     if has('py3')
       let g:UltiSnipsUsePythonVersion = 2
@@ -112,7 +112,8 @@ function! LoadPlugins() "{{{
   " }}}
 
   " {{{ Clang Complete
-    Bundle 'Rip-Rip/clang_complete'
+    Plugin 'Rip-Rip/clang_complete', { 'pinned' : 1 }
+
     let g:clang_complete_auto     = 1
     let g:clang_auto_select       = 1
     let g:clang_complete_copen    = 1
@@ -130,17 +131,17 @@ function! LoadPlugins() "{{{
   " }}}
 
   " {{{ startify   a pretty welcome screen
-  " Bundle 'mhinz/vim-startify'
+  " Plugin 'mhinz/vim-startify'
   " let g:startify_files_number = 10
   " let g:startify_bookmarks    = [ '~/.vimrc', '~/.zshrc', '~/.config/awesome/rc.lua' ]
   " }}}
 
   " {{{ tablify   generate tables
-  " Bundle 'Stormherz/tablify'
+  " Plugin 'Stormherz/tablify'
   " }}}
 
   " {{{ airline   pretty status-line
-    Bundle 'bling/vim-airline'
+    Plugin 'bling/vim-airline'
     let g:airline_mode_map = { '__' : '-', 'n'  : 'N', 'i'  : 'I',
         \ 'R'  : 'R', 'c'  : 'C', 'v'  : 'V', 'V'  : 'V',
         \ '' : 'V', 's'  : 'S', 'S'  : 'S', '' : 'S', }
@@ -183,11 +184,7 @@ function! LoadPlugins() "{{{
     endfunction
 
     " function! Face()
-    "   if "$TERM" == "linux"
-    "     return '=w='
-    "   else
-    "     return ''
-    "   endif
+    "   return '=w='
     " endfunction
 
     " let g:airline_section_b =
@@ -212,35 +209,35 @@ function! LoadPlugins() "{{{
 
     let g:airline#extensions#tabline#enabled             = 0
 
-"    let g:airline#extensions#tabline#left_sep         = g:airline_left_sep
-"    let g:airline#extensions#tabline#right_sep        = g:airline_right_sep
-"    let g:airline#extensions#tabline#show_buffers     = 1
-"    let g:airline#extensions#tabline#show_tab_nr      = 1
-"    let g:airline#extensions#tabline#buffer_min_count = 1
+  "  let g:airline#extensions#tabline#left_sep         = g:airline_left_sep
+  "  let g:airline#extensions#tabline#right_sep        = g:airline_right_sep
+  "  let g:airline#extensions#tabline#show_buffers     = 1
+  "  let g:airline#extensions#tabline#show_tab_nr      = 1
+  "  let g:airline#extensions#tabline#buffer_min_count = 1
   " }}}
 
   " {{{ calutil (as DEP)
-    Bundle 'cskeeters/vim-calutil'
+    Plugin 'cskeeters/vim-calutil'
   " }}}
 
   " {{{ EasyAlign
-    Bundle 'junegunn/vim-easy-align'
+    Plugin 'junegunn/vim-easy-align'
     vnoremap <silent> <Enter> :EasyAlign<Enter>
   " }}}
 
   " {{{ tagbar
-    Bundle 'majutsushi/tagbar'
+    Plugin 'majutsushi/tagbar'
     let g:tagbar_width     = 20
     nmap  <leader>T :TagbarToggle<CR>
     nmap  <leader>p :TagbarTogglePause<CR>
   " }}}
 
   " {{{ nerdcommenter
-    Bundle 'scrooloose/nerdcommenter'
+    Plugin 'scrooloose/nerdcommenter'
   " }}}
 
   " {{{ nerdtree
-    Bundle 'scrooloose/nerdtree'
+    Plugin 'scrooloose/nerdtree'
     nmap  <leader>E :NERDTreeToggle<CR>
     let g:NERDTreeWinSize  = 18
     let g:NERDTreeSortOrder = [
@@ -255,19 +252,19 @@ function! LoadPlugins() "{{{
   " }}}
 
   " {{{ surround
-    Bundle 'tpope/vim-surround'
+    Plugin 'tpope/vim-surround'
   " }}}
 
   " {{{ VimProc  (as DEP)(of VimShell)
-  " Bundle 'Shougo/vimproc.vim'
+  " Plugin 'Shougo/vimproc.vim'
   " }}}
 
   " {{{ VimShell   terminal inside GVim
-  " Bundle 'Shougo/vimshell.vim'
+  " Plugin 'Shougo/vimshell.vim'
   " }}}
 
   " {{{ emmet  ZenCoding
-    Bundle 'mattn/emmet-vim'
+    Plugin 'mattn/emmet-vim'
 
     let g:user_emmet_leader_key     = '<c-e>'
     let g:user_emmet_expandword_key = '<c-e>'
@@ -279,66 +276,68 @@ function! LoadPlugins() "{{{
   " }}}
 
   " {{{ VimIm   Chinese input method
-  " Bundle 'VimIM'
+  " Plugin 'VimIM'
   " }}}
 
   " {{{ Gundo   visual undo-tree
-  " Bundle 'Gundo'
+    Plugin 'Gundo'
+
+    nmap <leader>u    :GundoToggle<CR>
   " }}}
 
   " {{{ DrawIt   draw ascii pictures
-  " Bundle 'DrawIt'
+  " Plugin 'DrawIt'
   " }}}
 
   " {{{ lua.vim
-  " Bundle 'lua.vim'
+  " Plugin 'lua.vim'
   " }}}
 
   " {{{ vim-misc AS DEP(lua.vim)
-  " Bundle 'vim-misc'
+  " Plugin 'vim-misc'
   " }}}
 
   " {{{ indentLine
-  " Bundle 'Yggdroot/indentLine'
+  " Plugin 'Yggdroot/indentLine'
   " let g:indentLine_faster = 1
   " }}}
 
   " {{{ vim-molokai
-  " Bundle 'tomasr/molokai'
+    Plugin 'tomasr/molokai'
   " }}}
 
   " {{{ rainbow_parentheses.vim for scheme
-  " Bundle 'kien/rainbow_parentheses.vim'
+  " Plugin 'kien/rainbow_parentheses.vim'
   " au BufEnter,BufRead *.scm :RainbowParenthesesActivate
   " au BufEnter,BufRead *.scm :RainbowParenthesesLoadRound
   " }}}
 
   " {{{ squirrel  squirrel ft plugin
-  " Bundle 'xevz/vim-squirrel'
+  " Plugin 'xevz/vim-squirrel'
   " }}}
 
   " {{{ vim-fugitive
-  " Bundle 'tpope/vim-fugitive'
+  " Plugin 'tpope/vim-fugitive'
   " }}}
 
   " {{{ hsitz/VimOrganizer
-  " Bundle 'hsitz/VimOrganizer'
+  " Plugin 'hsitz/VimOrganizer'
 
   " let g:global_column_view = 1
   " au BufEnter,BufRead *.org,todo,TODO set ft=org
   " }}}
 
   " {{{ NrrwRgn (DEP for VimOrganizer)
-  " Bundle 'chrisbra/NrrwRgn'
+  " Plugin 'chrisbra/NrrwRgn'
   " }}}
 
   " {{{ Color-Scheme-Exploer
-  " Bundle 'Color-Scheme-Explorer'
+  " Plugin 'Color-Scheme-Explorer'
   " }}}
 
   " MARK END_OF_BUNDLE_LIST }}}
 
-  syntax on
+  call vundle#end()
   filetype plugin indent on
 endfunction "}}}
 
@@ -561,8 +560,11 @@ function! GuiSettings() "{{{
 
   com! -nargs=0 Demode :call Demode()
 
-  set guifont     =PT\ Mono\ 11
+  " set guifont     =envypn
   " set gfw         =MingLiU\ 10
+
+  set guifont     =Microsoft\ YaHei\ Mono\ 11
+  set gfw         =Microsoft\ YaHei\ Mono\ 11
 
   colorscheme     numix
 

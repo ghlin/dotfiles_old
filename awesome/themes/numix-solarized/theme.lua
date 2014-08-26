@@ -3,26 +3,26 @@ local awful     = require 'awful'
 -- {{{ Main
 theme                       = {}
 theme.wallpaper             = os.getenv 'AWESOME_BG' or os.getenv 'HOME' .. '/Pictures/air.jpg'
-theme.font                  = 'Terminus 8'
+theme.font                  = 'ProFont 8'
 theme.tasklist_disable_icon = true
 -- }}}
 
 -- {{{ Colors
-theme.fg_tooltip    = '#2d2d2d'
+theme.fg_tooltip    = '#000000'
 
-theme.fg_em         = '#2d2d2d'
+theme.fg_em         = '#000000'
 
-theme.bg_normal     = '#dedede'
-theme.bg_focus      = '#dedede'
+theme.bg_normal     = '#eee8d5'
+theme.bg_focus      = '#eee8d5'
 theme.bg_urgent     = '#ff0000'
-theme.bg_minimize   = '#dedede'
+theme.bg_minimize   = '#eee8d5'
 
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = '#2d2d2d'
-theme.fg_focus      = '#d63937'
+theme.fg_normal     = '#000000'
+theme.fg_focus      = '#268bd2'
 theme.fg_urgent     = '#ff0000'
-theme.fg_minimize   = '#4d4d4d'
+theme.fg_minimize   = '#eeeeee'
 
 theme.border_width  = '0'
 theme.border_normal = '#000000'
@@ -55,6 +55,8 @@ theme.thunar                = awful.util.getdir 'config'  .. '/themes/shared/ico
 theme.browser               = awful.util.getdir 'config'  .. '/themes/shared/icons/browser.svg'
 theme.terminal              = awful.util.getdir 'config'  .. '/themes/shared/icons/terminal.svg'
 theme.text_editor           = awful.util.getdir 'config'  .. '/themes/shared/icons/text-editor.svg'
+theme.audio_player          = awful.util.getdir 'config'  .. '/themes/shared/icons/audioplayer.svg'
+theme.naughty               = awful.util.getdir 'config'  .. '/themes/shared/icons/naughty.svg'
 -- }}}
 
 -- {{{ Layout
@@ -73,5 +75,4 @@ theme.layout_floating   = awful.util.getdir 'config' .. '/themes/shared/icons/fl
 -- }}}
 
 return theme
-
 

@@ -55,7 +55,10 @@ end
 
 -- {{{ Tags
 do
-  local names  = { ' Term', ' Term', ' Dev', ' WWW', ' FM', ' Daily' }
+  -- local names  = { '织女一', '河鼓二', '天津四', '南河三', '参宿四', '天狼星', }
+  -- local names  = { ' Term', ' Term', ' Dev ', ' WWW ', '  FM ', ' Daily', ' Free' }
+  -- local names  = { '壹', '贰', '叁', '肆', '伍', '陆', '柒' }
+  local names  = { ' 1 ', ' 2 ', ' 3 ', ' 4 ', ' 5 ', ' 6 ', ' 7 ', ' 8 ' }
   local layout = {}
   local icons  = {}
 
@@ -84,6 +87,8 @@ myawsomemenu = {
   { "Quit",    awesome.quit    };
 }
 
+local xiamiplayer = [[chromium "--app=http://www.xiami.com/play?ids=/song/playlist/id/1769606941/object_name/default/object_id/0#loaded"]]
+
 mymainmenu = awful.menu {
   items = {
     { "Awesome",      myawsomemenu, beautiful.awesome_icon };
@@ -91,6 +96,7 @@ mymainmenu = awful.menu {
     { "Text Editor",  "gvim",       beautiful.text_editor  };
     { "File Manager", "pcmanfm",    beautiful.thunar       };
     { "Terminal",     terminal,     beautiful.terminal     };
+    { "Xiami Player", xiamiplayer,  beautiful.audio_player };
   }
 }
 -- }}}
@@ -400,15 +406,17 @@ awful.rules.rules = {
 -- }}}
 
 -- {{{ Signals
+
+local honer_size_hints = {
+  ['gvim'] = true,
+  ['Gvim'] = true,
+  -- ['terminator'] = true,
+  -- ['Terminator'] = true,
+}
+
 client.connect_signal("manage",
   function (c, startup)
-    if c.class == 'gvim' or c.class == 'Gvim' then
-      c.size_hints_honor = true
-    else
-      c.size_hints_honor = false
-    end
-
-
+    c.size_hints_honor = honer_size_hints[c.class] or false
 
     -- Sloppy focus
     c:connect_signal("mouse::enter",
@@ -450,10 +458,8 @@ do
   end
 
   local cmds = {
-    'xfsettingsd &';
+    'xfsettingsd --replace &';
     'xcompmgr -Ss -n -Cc -fF -I-10 -O-10 -D1 -t-3 -l-4 -r4 &';
-    'fcitx &';
-    'xset -b';
   }
 
   for _,i in ipairs(cmds) do awful.util.spawn_with_shell(i) end

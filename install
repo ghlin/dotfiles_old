@@ -1,0 +1,80 @@
+#!/bin/bash
+
+DF_DIR=$1   # dir where contains vim/zsh/etc...
+DF_HOME=$2  # home dir
+
+DF_REPO="$DF_HOME/.config/dotfiles" # stores the files
+
+# create dir if needed
+
+[ -d "$DF_REPO" ] || mkdir "$DF_REPO" -p
+
+DF_TIMESTAMP=$(date +"%F-%T")
+
+function fullpath()
+{
+  local f=$1
+  echo "$(dirname $f)/$(basename $f)"
+}
+
+function makebackup()
+{
+  local old=$1
+
+  mv "$DF_REPO/$old" "$DF_REPO/$old.$DF_TIMESTAMP.backup"
+
+  echo "    old -> $DF_REPO/$old.$DF_TIMESTAMP.backup"
+}
+
+function fortarget()
+{
+  local target=$1
+
+  echo "for $target"
+  echo "    src -> $DF_DIR/$target"
+  echo "    dst -> $DF_REPO/$target"
+
+  [ -d "$DF_REPO/$target" ] && makebackup "$target"
+  cp "$DF_DIR/$target" "$DF_REPO/$target" -r
+
+  echo "done"
+  echo ""
+}
+
+function lnk()
+{
+  local src=$1
+  local dst=$2
+
+  [ -n $dst ] && rm $dst
+
+  ln "$src" "$(fullpath $dst)" -s
+}
+
+# for vim
+fortarget "vim"
+# vim/.vim -> $HOME/.vim
+lnk "$DF_REPO/vim/.vimrc" "$DF_HOME/.vimrc"
+lnk "$DF_REPO/vim/.vim"   "$DF_HOME/.vim"
+
+# for zsh
+fortarget "zsh"
+# zsh/.zshrc -> $HOME/.zshrc
+lnk "$DF_REPO/zsh/.zshrc" "$DF_HOME/.zshrc"
+
+# for awesome
+fortarget "awesome"
+lnk "$DF_REPO/awesome" "$DF_HOME/.config/awesome"
+
+# for moc
+fortarget "moc"
+lnk "$DF_REPO/moc" "$DF_HOME/.moc"
+
+# for terminator
+fortarget "terminator"
+lnk "$DF_REPO/terminator" "$DF_HOME/.config/terminator"
+
+# etc...
+
+
+

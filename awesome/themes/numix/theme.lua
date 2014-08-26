@@ -55,6 +55,7 @@ theme.thunar                = awful.util.getdir 'config'  .. '/themes/shared/ico
 theme.browser               = awful.util.getdir 'config'  .. '/themes/shared/icons/browser.svg'
 theme.terminal              = awful.util.getdir 'config'  .. '/themes/shared/icons/terminal.svg'
 theme.text_editor           = awful.util.getdir 'config'  .. '/themes/shared/icons/text-editor.svg'
+theme.audio_player          = awful.util.getdir 'config'  .. '/themes/shared/icons/audioplayer.svg'
 theme.naughty               = awful.util.getdir 'config'  .. '/themes/shared/icons/naughty.svg'
 -- }}}
 
