@@ -16,7 +16,7 @@ function! LoadPlugins() "{{{
   " }}}
 
   " {{{ github-like color scheme
-  " Plugin 'github-theme'
+    Plugin 'github-theme'
   " }}}
 
   " {{{ cpp-vim (c++11 highlighting)
@@ -96,7 +96,7 @@ function! LoadPlugins() "{{{
   " }}}
 
   " {{{ gtk-mode   stuffs writing gtk code(vala highlighting)
-  " Plugin 'gtk-mode'
+    Plugin 'gtk-mode'
   " }}}
 
   " {{{ ReplaceWithRegister
@@ -146,54 +146,26 @@ function! LoadPlugins() "{{{
         \ 'R'  : 'R', 'c'  : 'C', 'v'  : 'V', 'V'  : 'V',
         \ '' : 'V', 's'  : 'S', 'S'  : 'S', '' : 'S', }
 
-
     if !exists('g:airline_symbols')
       let g:airline_symbols = {}
     endif
 
-    if has('gui_running')
-      let g:airline_symbols.paste      = "[paste]"
-      let g:airline_symbols.whitespace = "[=]"
-      let g:airline_symbols.branch     = "[branch]"
-      let g:airline_symbols.readonly   = "[RO]"
-      let g:airline_symbols.linenr     = "L"
+    let g:airline_symbols.paste      = "[paste]"
+    let g:airline_symbols.whitespace = "[=]"
+    let g:airline_symbols.branch     = "[branch]"
+    let g:airline_symbols.readonly   = "[RO]"
+    let g:airline_symbols.linenr     = "L"
 
-      let g:airline_left_sep           = "|"
-      let g:airline_left_alt_sep       = "|"
-      let g:airline_right_sep          = "|"
-      let g:airline_right_alt_sep      = "|"
-    else
-      let g:airline_symbols.paste      = "paste"
-      let g:airline_symbols.whitespace = "\u2739"
-      let g:airline_symbols.branch     = "\ue0a0"
-      let g:airline_symbols.readonly   = "\ue0a2"
-      let g:airline_symbols.linenr     = "\ue0a1"
+    let g:airline_left_sep           = "|"
+    let g:airline_left_alt_sep       = "|"
+    let g:airline_right_sep          = "|"
+    let g:airline_right_alt_sep      = "|"
 
-      let g:airline_left_sep           = "\ue0b1"
-      let g:airline_left_alt_sep       = "\ue0b1"
-      let g:airline_right_sep          = "\ue0b3"
-      let g:airline_right_alt_sep      = "\ue0b3"
-    endif
-
-    if has('gui_running')
-      let g:airline_theme = 'monochrome'
-    endif
+    let g:airline_theme = 'monochrome'
 
     function! BufNr()
       return '#' . bufnr('%')
     endfunction
-
-    " function! Face()
-    "   return '=w='
-    " endfunction
-
-    " let g:airline_section_b =
-    "      \   '%{airline#util#wrap(Face(),0)}'
-
-    " let g:airline_section_x =
-    "       \   '%{airline#util#prepend(airline#extensions#tagbar#currenttag(),0)}'
-    "       \ . '%{airline#util#prepend(BufNr(),0)}'
-    "       \ . '%{airline#util#wrap(airline#parts#filetype(),0)}'
 
     " exclude `currenttag'
     let g:airline_section_x =
@@ -256,11 +228,11 @@ function! LoadPlugins() "{{{
   " }}}
 
   " {{{ VimProc  (as DEP)(of VimShell)
-  " Plugin 'Shougo/vimproc.vim'
+    Plugin 'Shougo/vimproc.vim'
   " }}}
 
   " {{{ VimShell   terminal inside GVim
-  " Plugin 'Shougo/vimshell.vim'
+    Plugin 'Shougo/vimshell.vim'
   " }}}
 
   " {{{ emmet  ZenCoding
@@ -290,16 +262,16 @@ function! LoadPlugins() "{{{
   " }}}
 
   " {{{ lua.vim
-  " Plugin 'lua.vim'
+    Plugin 'lua.vim'
   " }}}
 
   " {{{ vim-misc AS DEP(lua.vim)
-  " Plugin 'vim-misc'
+    Plugin 'vim-misc'
   " }}}
 
   " {{{ indentLine
-  " Plugin 'Yggdroot/indentLine'
-  " let g:indentLine_faster = 1
+    Plugin 'Yggdroot/indentLine'
+    let g:indentLine_faster = 1
   " }}}
 
   " {{{ vim-molokai
@@ -307,9 +279,9 @@ function! LoadPlugins() "{{{
   " }}}
 
   " {{{ rainbow_parentheses.vim for scheme
-  " Plugin 'kien/rainbow_parentheses.vim'
-  " au BufEnter,BufRead *.scm :RainbowParenthesesActivate
-  " au BufEnter,BufRead *.scm :RainbowParenthesesLoadRound
+    Plugin 'kien/rainbow_parentheses.vim'
+    au BufEnter,BufRead *.scm :RainbowParenthesesActivate
+    au BufEnter,BufRead *.scm :RainbowParenthesesLoadRound
   " }}}
 
   " {{{ squirrel  squirrel ft plugin
@@ -321,18 +293,18 @@ function! LoadPlugins() "{{{
   " }}}
 
   " {{{ hsitz/VimOrganizer
-  " Plugin 'hsitz/VimOrganizer'
+    Plugin 'hsitz/VimOrganizer'
 
-  " let g:global_column_view = 1
-  " au BufEnter,BufRead *.org,todo,TODO set ft=org
+    let g:global_column_view = 1
+    au BufEnter,BufRead *.org,todo,TODO set ft=org
   " }}}
 
   " {{{ NrrwRgn (DEP for VimOrganizer)
-  " Plugin 'chrisbra/NrrwRgn'
+    Plugin 'chrisbra/NrrwRgn'
   " }}}
 
   " {{{ Color-Scheme-Exploer
-  " Plugin 'Color-Scheme-Explorer'
+    Plugin 'Color-Scheme-Explorer'
   " }}}
 
   " MARK END_OF_BUNDLE_LIST }}}
