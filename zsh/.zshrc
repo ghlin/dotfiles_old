@@ -6,19 +6,21 @@ DISABLE_AUTO_UPDATE="true"
 ZSH_THEME="gotcha"
 # ZSH_THEME="powerline"
 
-plugins=(git)
-
+plugins=(git sudo)
 source $ZSH/oh-my-zsh.sh
+
+# enable interactive comments
+setopt INTERACTIVE_COMMENTS
 
 # just source it, it`s much simple than to copy files
 # into ZSH_PLUGIN_DIR and add it to plugins
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 export PATH="$PATH:$HOME/.local/bin/"
-export MY_GIT_REPO="/media/data/.gitrepo/"
 
 alias  gfw-me-not="source ~/.local/lib/cgfw.sh"
 alias  update-my-archlinux="yaourt -Syua"
+alias  just-update-my-archlinux="yaourt -Syua --noconfirm"
 alias  yaourt-Syua="yaourt -Syua"
 alias  start-httpd="sudo systemctl start httpd"
 alias  random-seq="uuidgen| cut -b 1-8"
@@ -26,10 +28,13 @@ alias  random-seq="uuidgen| cut -b 1-8"
 alias  scrot="scrot -e 'mv \$f $HOME/Pictures'"
 alias  mkdtdir="mkdir $(date +'%F-%H-%M-%S')"
 
+alias  restartgoagent="sudo systemctl restart goagent"
+alias  watchgoagent="watch systemctl status goagent -l"
+
 # awesome background
 #
-export AWESOME_BG="/home/ghlin/Pictures/dontpanic.png"
-export AWESOME_THEME='numix'
+export AWESOME_BG="/home/ghlin/Pictures/youcannotredo-red.png"
+export AWESOME_THEME='vertex'
 
 # default editor
 export EDITOR=vim
@@ -73,5 +78,18 @@ mount-ntfs() {
     sudo mount $1 $2 -o iocharset=utf8,umask=000
   fi
 }
+
+mount-fat32() {
+  sudo mount $1 $2 -o iocharset=utf8,umask=000
+}
+
+vundle-update() {
+  vim -c "execute \"PluginUpdate\"|q|q"
+}
+
+vundle-install() {
+  vim -c "execute \"PluginInstall\"|q|q"
+}
+
 
 
