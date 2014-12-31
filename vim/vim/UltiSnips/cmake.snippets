@@ -1,0 +1,35 @@
+snippet proj "proj" !b
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+
+PROJECT($1)
+INCLUDE_DIRECTORIES($1)
+
+SET(SRC_LIST
+    $2)
+
+ADD_EXECUTABLE($1)
+
+endsnippet
+
+snippet cmr "CMAKE_MINIMUM_REQUIRED" !b
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+$0
+endsnippet
+
+snippet inc "INCLUDE_DIRECTORIES" !b
+INCLUDE_DIRECTORIES($1)
+$0
+endsnippet
+
+snippet exec "ADD_EXECUTABLE" !b
+ADD_EXECUTABLE($1)
+$0
+endsnippet
+
+snippet src "SET(SRC_LIST)" !b
+SET(SRC_LIST
+    $1
+)
+$0
+endsnippet
+

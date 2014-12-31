@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/home/ghlin/Workspace/gotcha/src/common/log'
+let g:netrw_dirhist_2='/home/ghlin/Workspace/gotcha/src/common'
+let g:netrw_dirhist_3='/home/ghlin/Workspace/gotcha/src'
+let g:netrw_dirhist_4='/home/ghlin/Workspace/gotcha'
+let g:netrw_dirhist_5='/home/ghlin/Workspace/gotcha/test'
+let g:netrw_dirhist_6='/home/ghlin/Workspace/gotcha/test/common.log'

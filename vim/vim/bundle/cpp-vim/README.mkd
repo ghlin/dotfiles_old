@@ -1,0 +1,10 @@
+# cpp-vim
+
+This is Vim syntax files with C++11 support. `c.vim` is based on Bram Moolenaar
+<Bram@vim.org> and `cpp.vim` is based on Ken Shan <ccshan@post.harvard.edu>.
+
+## License
+
+License of original files conform to author of them. Enhancement of changes
+are licensed as VIM license. `vim-jp` will do maintenance of those files if
+possible. But we contribute this changes to VIM.

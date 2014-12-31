@@ -1,0 +1,33 @@
+###########################################################################
+#                            TextMate Snippets                            #
+###########################################################################
+
+
+snippet #! "Test"
+#!/usr/bin/perl -w
+
+use 5.010;
+use strict;
+
+endsnippet
+
+snippet todo "TODO" !bs
+# ${1:TODO}(ghlin) : ${2:reminder} `!v strftime("%m %d - %X")`
+endsnippet
+
+snippet "([^ 	])-" "->" !ir
+`!p snip.rv = match.group(1)`->$0
+endsnippet
+
+snippet " -" "x - x" !ir
+ - $0
+endsnippet
+
+snippet slurp "slurp"
+my $${1:var};
+{ local $/ = undef; local *FILE; open FILE, "<${2:file}"; $$1 = <FILE>; close FILE }
+
+endsnippet
+
+
+# vim:ft=snippets:
