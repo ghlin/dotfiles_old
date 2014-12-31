@@ -5,7 +5,7 @@ panic() {
   exit 1
 }
 
-user_dir="/tmp/dummy"
+user_dir="$HOME"
 
 dotfile_dir="$user_dir/.config/dotfiles-`uuidgen`"
 echo "use dotfiledir -> $dotfile_dir"
@@ -33,7 +33,7 @@ for prog in `ls`; do
 
       for f in `ls $prog`; do
         echo "  - ln $f -> $user_dir/.$f"
-        ln `realpath $f` $user_dir/.$f -s || panic "  * error occured when ln $f into $user_dir/.$f";
+        ln `realpath $prog/$f` $user_dir/.$f -s || panic "  * error occured when ln $prog/$f into $user_dir/.$f";
       done
     fi
   fi
