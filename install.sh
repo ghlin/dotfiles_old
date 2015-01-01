@@ -13,7 +13,7 @@ echo "use dotfiledir -> $dotfile_dir"
 [ -d $user_dir/.config ] || mkdir $user_dir/.config -pv
 [ -d $dotfile_dir      ] && panic "WTF! $dotfile_dir already existed!"
 
-cp . $dotfile_dir -rfv
+cp . $dotfile_dir -rf
 
 cd $dotfile_dir
 echo "Entering $dotfile_dir"

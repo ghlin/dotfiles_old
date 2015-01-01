@@ -30,14 +30,20 @@ alias  grep="grep --exclude-dir=.cvs --exclude-dir=.git --exclude-dir=.hg --excl
 alias  scrot="scrot -e 'mv \$f $HOME/Pictures'"
 alias  mkdtdir="mkdir $(date +'%F-%H-%M-%S')"
 
-alias  restartgoagent="sudo systemctl restart goagent"
-alias  watchgoagent="watch systemctl status goagent -l"
+# GAE ALIAS
+alias  gae-restart="sudo systemctl restart goagent"
+alias  gae-stop="sudo systemctl stop goagent"
+alias  gae-start="sudo systemctl start goagent"
+alias  gae-watch="watch systemctl status goagent -l"
+alias  gae-set-proxy="export http_proxy=http://127.0.0.1:8087/ https_proxy=$http_proxy HTTP_PROXY=$http_proxy HTTPS_PROXY=$HTTP_PROXY"
 
 # awesome background
-#
 export AWESOME_BG="/home/ghlin/Pictures/youcannotredo-red.png"
 export AWESOME_THEME='vertex'
-export AWESOME_WIBOX_POSITION='bottom';
+export AWESOME_WIBOX_POSITION='bottom'
+
+#
+export SHDIR="/media/shared/data"
 
 # default editor
 export EDITOR=vim
