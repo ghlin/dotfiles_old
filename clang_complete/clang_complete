@@ -1,0 +1,5 @@
+-I/home/ghlin/.local/include
+-std=c++1y
+-DDEBUG=1
+-D_DEBUG=1
+-DUSING_CLANG_COMPLETE=1
