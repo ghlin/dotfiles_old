@@ -25,10 +25,13 @@ alias  yaourt-Syua="yaourt -Syua"
 alias  start-httpd="sudo systemctl start httpd"
 alias  random-seq="uuidgen| cut -b 1-8"
 
+# grep updated
 alias  grep="grep --exclude-dir=.cvs --exclude-dir=.git --exclude-dir=.hg --exclude-dir=.svn --color=auto"
+unset  GREP_OPTIONS
 
 alias  scrot="scrot -e 'mv \$f $HOME/Pictures'"
 alias  mkdtdir="mkdir $(date +'%F-%H-%M-%S')"
+alias  date-token="date +'%F-%H-%M-%S'"
 
 # GAE ALIAS
 alias  gae-restart="sudo systemctl restart goagent"
