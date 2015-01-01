@@ -257,8 +257,8 @@ function! TermSettings() "{{{
     set t_Co=256
   else
     set t_Co=8
-    let &t_SI = "\<Esc>[?6;13;0;c"
-    let &t_EI = "\<Esc>[?16;13;0;c"
+    " let &t_SI = "\<Esc>[?6;13;0;c"
+    " let &t_EI = "\<Esc>[?16;13;0;c"
   endif
 
   let g:airline_theme = 'monochrome'
