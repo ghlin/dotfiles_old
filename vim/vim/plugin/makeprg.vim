@@ -77,7 +77,7 @@ fu! AM_build_makeprg()
 
   for i in l:arg
     for x in b:AM_config[i[0]]
-      let l:makeprg = l:makeprg . i[1] . x
+      let l:makeprg = l:makeprg . i[1] . '\"' . x . '\"'
     endfor
   endfor
 

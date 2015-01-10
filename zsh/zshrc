@@ -41,7 +41,7 @@ alias  gae-watch="watch systemctl status goagent -l"
 alias  gae-set-proxy="export http_proxy=http://127.0.0.1:8087/ https_proxy=$http_proxy HTTP_PROXY=$http_proxy HTTPS_PROXY=$HTTP_PROXY"
 
 # awesome background
-export AWESOME_BG="/home/ghlin/Pictures/youcannotredo-red.png"
+export AWESOME_BG="/home/ghlin/Pictures/puredark.png"
 export AWESOME_THEME='vertex'
 export AWESOME_WIBOX_POSITION='bottom'
 
@@ -103,5 +103,7 @@ vundle-install() {
   vim -c "execute \"PluginInstall\"|q|q"
 }
 
-
+find-process() {
+  ps -aux| grep $*| grep -v grep
+}
 

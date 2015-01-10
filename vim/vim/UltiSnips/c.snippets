@@ -5,12 +5,9 @@
 
 snippet hd "headsome" !b
 /*
- * file       `!p snip.rv = snip.fn or "untitled"`
- * author     ghlin <2012.2.9.ghl@gmail.com>
- * date       `!v strftime("%Y %b %d - %X")`
- * modified   `!v strftime("%Y %b %d - %X")`
- * license    GPL
- * brief      ${1:`!p snip.rv = snip.fn or "none"`}
+ * @author     ghlin <2012.2.9.ghl@gmail.com>
+ * @date       `!v strftime("%F %T")`
+ * @brief      ${1:`!p snip.rv = snip.fn or "none"`}
  */
 
 $0
@@ -49,23 +46,16 @@ ${0}
 
 endsnippet
 
-snippet st "struct" !bs
-struct $1
-{
-  $0
-};
-endsnippet
-
 snippet todo "a todo reminder" !bs
-// ${1:TODO}(ghlin) : ${2:reminder} `!v strftime("%m %d - %X")`
+// ${1:TODO}(ghlin) : ${2:reminder} `!v strftime("%F %T")`
 endsnippet
 
 snippet xxx "a xxx reminder" !bs
-// ${1:XXX}(ghlin) : ${2:reminder} `!v strftime("%m %d - %X")`
+// ${1:XXX}(ghlin) : ${2:reminder} `!v strftime("%F %T")`
 endsnippet
 
 snippet fixme "a fixme reminder" !bs
-// ${1:FIXME}(ghlin) : ${2:reminder} `!v strftime("%m %d - %X")`
+// ${1:FIXME}(ghlin) : ${2:reminder} `!v strftime("%F %T")`
 endsnippet
 
 snippet brief "doxygen with @brief" !bs
@@ -97,11 +87,6 @@ snippet undef "undefine macro" !b
 $0
 endsnippet
 
-snippet fff "folder region" !b
-// {{{ ${1:region description}
-$0
-// }}}
-endsnippet
 
 
 # vim:ft=snippets:

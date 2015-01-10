@@ -214,7 +214,7 @@ function! BasicSettings() "{{{
   command! -bang -nargs=? ExecPipe :call ExecPipe_Put('<args>')
 
   " enable doxygen highlighting
-  " let g:load_doxygen_syntax = 1
+  let g:load_doxygen_syntax = 1
 endfunction "}}}
 
 function! GuiSettings() "{{{
@@ -246,7 +246,7 @@ function! GuiSettings() "{{{
   " set guifont     =PT\ Mono 11
   " set gfw         =Microsoft\ YaHei\ 11
 
-  colorscheme     midnight_no_italic
+  colorscheme      solarized
   set background  =dark
 
   set mouse       =
