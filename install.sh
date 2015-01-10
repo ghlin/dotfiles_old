@@ -7,7 +7,7 @@ panic() {
 
 user_dir="$HOME"
 
-dotfile_dir="$user_dir/.config/dotfiles-`uuidgen`"
+dotfile_dir="$user_dir/.config/dotfiles"
 echo "use dotfiledir -> $dotfile_dir"
 
 [ -d $user_dir/.config ] || mkdir $user_dir/.config -pv
