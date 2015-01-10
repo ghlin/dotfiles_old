@@ -1,0 +1,71 @@
+URxvt.font: xft:Tamsyn:size=10
+
+URxvt.depth: 32
+
+URxvt.background: #2D2D2D
+URxvt.foreground: #DEDEDE
+
+!  Black    Red    Green  Yellow   Blue   Magenta  Cyan    Gray
+! #000000 #B11400 #029004 #DBD600 #0040ED #8D00A4 #007E80 #D4D4D4
+! #5E5E5E #EF2929 #00D30D #FCE94F #0077FF #B75FAD #34E2E2 #FFFFFF
+
+! Black
+URxvt.color0: #000000
+URxvt.color8: #5E5E5E
+
+! Red
+URxvt.color1: #B11400
+URxvt.color9: #EF2929
+
+! Green
+URxvt.color2: #029004
+URxvt.color10: #00D30D
+
+! Yellow
+URxvt.color3: #DBD600
+URxvt.color11: #FCE94F
+
+! Blue
+URxvt.color4: #0040ED
+URxvt.color12: #0077FF
+
+! Magenta
+URxvt.color5: #8D00A4
+URxvt.color13: #B75FAD
+
+! Cyan
+URxvt.color6: #007E80
+URxvt.color14: #34E2E2
+
+! White
+URxvt.color7: #D4D4D4
+URxvt.color15: #FFFFFF
+
+! Tabs
+! URxvt.perl-ext-common: ..., tabbed, ...
+! URxvt.tabbed.tabbar-fg: 2
+! URxvt.tabbed.tabbar-bg: 0
+! URxvt.tabbed.tab-fg:    3
+! URxvt.tabbed.tab-bg:    0
+
+! Operation
+! URxvt.urlLauncher: chromium
+! URxvt.matcher.button: 1
+! URxvt.perl-ext-commn: ..., matcher, ...
+
+! Scrolling
+URxvt.scrollBar: False
+URxvt.mouseWhellScrollPage: True
+! URxvt.scrollTtyOutput: False
+! URxvt.scrollWithBuffer: True
+! URxvt.scrollTtyKeypress: True
+URxvt.saveLines: 2048
+
+! Cursor
+URxvt.cursorBlink: True
+
+
+! Clipboard
+URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+URxvt.keysym.Shift-Control-C: perl:clipboard:copy
+
