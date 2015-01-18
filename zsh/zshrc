@@ -2,7 +2,7 @@ ZSH=/usr/share/oh-my-zsh/
 
 DISABLE_AUTO_UPDATE="true"
 
-ZSH_THEME="gotcha"
+ZSH_THEME="zhann"
 
 plugins=(git sudo)
 source $ZSH/oh-my-zsh.sh
