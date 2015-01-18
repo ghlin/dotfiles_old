@@ -237,16 +237,20 @@ function! GuiSettings() "{{{
   " set guifont     =envypn
   " set gfw         =MingLiU\ 10
 
-  set guifont     =Tamsyn\ 10
-  set gfw         =MingLiU\ 10
+  "set guifont     =Tamsyn\ 10
+  "set gfw         =MingLiU\ 10
 
-  " set guifont     =Courier\ New\ 10
-  " set gfw         =MingLiU\ 10
+  "set guifont     =Courier\ New\ 10
+  "set gfw         =MingLiU\ 10
 
   " set guifont     =PT\ Mono 11
   " set gfw         =Microsoft\ YaHei\ 11
 
-  colorscheme      solarized
+  set guifont     =Fixedsys\ Excelsior\ 3.01-L2\ 11
+  set gfw         =MingLiU\ 11
+
+  colorscheme      darkgreen
+  set cul
   set background  =dark
 
   set mouse       =
@@ -262,7 +266,7 @@ function! TermSettings() "{{{
   endif
 
   let g:airline_theme = 'monochrome'
-  colorscheme      numix
+  colorscheme      lingo
 
   set title
   set termencoding=utf-8

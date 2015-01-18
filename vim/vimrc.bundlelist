@@ -123,7 +123,7 @@
 " }}}
 
 " {{{ Clang Complete
-  Plugin 'Rip-Rip/clang_complete', { 'pinned' : 1 }
+  Plugin 'Rip-Rip/clang_complete', { 'pinned' : 0 }
 
   let g:clang_complete_auto     = 1
   let g:clang_auto_select       = 1
@@ -264,7 +264,7 @@
 " }}}
 
 " {{{ UltiSnips
-  Plugin 'SirVer/ultisnips', { 'pinned' : 1 }
+  Plugin 'SirVer/ultisnips', { 'pinned' : 0 }
   " use py3: clang_complete [snippets engine not found]
   if has('py3')
     let g:UltiSnipsUsePythonVersion = 2

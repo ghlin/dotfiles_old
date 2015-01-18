@@ -180,6 +180,8 @@ g:UltiSnipsEditSplit        Defines how the edit window is opened. Possible
                             |normal|         Default. Opens in the current window.
                             |horizontal|     Splits the window horizontally.
                             |vertical|       Splits the window vertically.
+                            |context|        Splits the window vertically or
+                                           horizontally depending on context.
 
                                                         *g:UltiSnipsSnippetsDir*
 g:UltiSnipsSnippetsDir
@@ -190,6 +192,14 @@ g:UltiSnipsSnippetsDir
                             "~/.vim/mydir/UltiSnips/cpp.snippets". Note that
                             directories named "snippets" are reserved for
                             snipMate snippets and cannot be used.
+
+                                                        *g:UltiSnipsEnableSnipMate*
+g:UltiSnipsEnableSnipMate
+                            Enable looking for SnipMate snippets in
+                            &runtimepath. UltiSnips will search only for
+                            directories named 'snippets' while looking for
+                            SnipMate snippets. Defaults to "1", so UltiSnips
+                            will look for SnipMate snippets.
 
 
                                                        *:UltiSnipsAddFiletypes*
@@ -219,10 +229,13 @@ The priority will then be rails -> ruby -> programming -> all.
 3.2 Triggers                                             *UltiSnips-triggers*
 ------------
 
+                           *g:UltiSnipsExpandTrigger* *g:UltiSnipsListSnippets*
+               *g:UltiSnipsJumpForwardTrigger* *g:UltiSnipsJumpBackwardTrigger*
 You can define the keys used to trigger UltiSnips actions by setting global
 variables. Variables define the keys used to expand a snippet, jump forward
 and jump backwards within a snippet, and list all available snippets in the
-current expand context. The variables with their default values are: >
+current expand context. Be advised, that some terminal emulators don't send
+<c-tab> to the running program. The variables with their default values are: >
    g:UltiSnipsExpandTrigger               <tab>
    g:UltiSnipsListSnippets                <c-tab>
    g:UltiSnipsJumpForwardTrigger          <c-j>
@@ -236,7 +249,7 @@ vimrc file. >
    let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 UltiSnips will only map the jump triggers while a snippet is active to
-interfer as little as possible with other mappings.
+interfere as little as possible with other mappings.
 
 The default value for g:UltiSnipsJumpBackwardTrigger interferes with the
 built-in complete function: |i_CTRL-X_CTRL-K|. A workaround is to add the
@@ -258,9 +271,9 @@ to the same value then the function you are actually going to use is
 UltiSnips#ExpandSnippetOrJump.
 
 Each time any of the functions UltiSnips#ExpandSnippet,
-UltiSnips#ExpandSnippet, UltiSnips#JumpBackwards or UltiSnips#JumpBackwards is
-called a global variable is set that contains the return value of the
-corresponding function.
+UltiSnips#ExpandSnippetOrJump, UltiSnips#JumpForwards or
+UltiSnips#JumpBackwards is called a global variable is set that contains the
+return value of the corresponding function.
 
 The corresponding variables and functions are:
 UltiSnips#ExpandSnippet       --> g:ulti_expand_res (0: fail, 1: success)
@@ -926,7 +939,7 @@ directly inside your snippets. For example to use
 
    global !p
    from my_snippet_helpers import *
-   endglobals
+   endglobal
 
 
 4.4 Tabstops and Placeholders   *UltiSnips-tabstops* *UltiSnips-placeholders*
@@ -1237,12 +1250,23 @@ directive.
 clearsnippets
 ------------------- SNAP -------------------
 
-Without arguments, 'clearsnippets' removes all snippets defined up to that
-point for the current file type. 
+'clearsnippets' removes all snippets with a priority lower than the current
+one. For example, the following cleares all snippets that have priority <= 1,
+even though the example snippet is defined after the 'clearsnippets'.
 
-To clear one or more specific snippet, provide the names of the snippets as
-arguments to the 'clearsnippets' command. The following example will clear
-the snippets 'trigger1' and 'trigger2'.
+------------------- SNIP -------------------
+priority 1
+clearsnippets
+
+priority -1
+snippet example "Cleared example"
+	This will never be expanded.
+endsnippet
+------------------- SNAP -------------------
+
+To clear one or more specific snippet, provide the triggers of the snippets as
+arguments to the 'clearsnippets' command. The following example will clear the
+snippets 'trigger1' and 'trigger2'.
 
 ------------------- SNIP -------------------
 clearsnippets trigger1 trigger2
@@ -1393,6 +1417,11 @@ individuals have contributed to UltiSnips (in chronological order):
    Andrew Ruder - aeruder
    Mathias Fußenegger - mfussenegger
    Kevin Ballard - kballard
+   Ahbong Chang - cwahbong
+   Glenn Griffin - ggriffiniii
+   Michael - Pyrohh
+   Stanislav Seletskiy - seletskiy
+   Pawel Palucki - ppalucki
 
 
 Thank you for your support.

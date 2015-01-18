@@ -2,9 +2,7 @@ ZSH=/usr/share/oh-my-zsh/
 
 DISABLE_AUTO_UPDATE="true"
 
-# ZSH_THEME="re5et"
 ZSH_THEME="gotcha"
-# ZSH_THEME="powerline"
 
 plugins=(git sudo)
 source $ZSH/oh-my-zsh.sh
@@ -18,10 +16,8 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 
 export PATH="$PATH:$HOME/.local/bin/"
 
-alias  gfw-me-not="source ~/.local/lib/cgfw.sh"
 alias  update-my-archlinux="yaourt -Syua"
 alias  just-update-my-archlinux="yaourt -Syua --noconfirm"
-alias  yaourt-Syua="yaourt -Syua"
 alias  start-httpd="sudo systemctl start httpd"
 alias  random-seq="uuidgen| cut -b 1-8"
 
@@ -30,14 +26,13 @@ alias  grep="grep --exclude-dir=.cvs --exclude-dir=.git --exclude-dir=.hg --excl
 unset  GREP_OPTIONS
 
 alias  scrot="scrot -e 'mv \$f $HOME/Pictures'"
-alias  mkdtdir="mkdir $(date +'%F-%H-%M-%S')"
-alias  date-token="date +'%F-%H-%M-%S'"
+alias  dt-stamp="date +'%F-%H-%M-%S'"
 
 # GAE ALIAS
 alias  gae-restart="sudo systemctl restart goagent"
 alias  gae-stop="sudo systemctl stop goagent"
 alias  gae-start="sudo systemctl start goagent"
-alias  gae-watch="watch systemctl status goagent -l"
+alias  gae-status="watch systemctl status goagent -l"
 alias  gae-set-proxy="export http_proxy=http://127.0.0.1:8087/ https_proxy=$http_proxy HTTP_PROXY=$http_proxy HTTPS_PROXY=$HTTP_PROXY"
 
 # awesome background
@@ -54,7 +49,6 @@ export EDITOR=vim
 # Fontconfig-Infinality
 export INFINALITY_FT_FILTER_PARAMS="20 20 30 20 20"
 export INFINALITY_FT_CHROMEOS_STYLE_SHARPENING_STRENGTH=50
-# export INFINALITY_FT_CONTRAST="30"
 
 # color gcc output
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
