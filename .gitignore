@@ -1,4 +1,5 @@
-.pyc
+*.pyc
+*.swp
 .viminfo
-.nertwish
+vim/.vim/.netrwhist
 
