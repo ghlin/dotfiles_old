@@ -1,25 +1,30 @@
+if [[ $TERM == "xterm" ]] {
+  export TERM="xterm-256color"
+}
+
 ZSH=/usr/share/oh-my-zsh/
 
 DISABLE_AUTO_UPDATE="true"
 
-ZSH_THEME="konsole"
+ZSH_THEME="ghlin"
 
 plugins=(git sudo)
 source $ZSH/oh-my-zsh.sh
 
+
 # enable interactive comments
 setopt INTERACTIVE_COMMENTS
 
-# just source it, it`s much simple than to copy files
-# into ZSH_PLUGIN_DIR and add it to plugins
+# zsh-syntax-highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-export PATH="$PATH:$HOME/.local/bin/"
+export PATH="$PATH:$HOME/.local/bin/:$HOME/WineApp/"
 
 alias  update-my-archlinux="yaourt -Syua"
 alias  just-update-my-archlinux="yaourt -Syua --noconfirm"
 alias  start-httpd="sudo systemctl start httpd"
 alias  random-seq="uuidgen| cut -b 1-8"
+unalias sl
 
 # grep updated
 alias  grep="grep --exclude-dir=.cvs --exclude-dir=.git --exclude-dir=.hg --exclude-dir=.svn --color=auto"
@@ -33,10 +38,11 @@ alias  gae-restart="sudo systemctl restart goagent"
 alias  gae-stop="sudo systemctl stop goagent"
 alias  gae-start="sudo systemctl start goagent"
 alias  gae-status="watch systemctl status goagent -l"
-alias  gae-set-proxy="export http_proxy=http://127.0.0.1:8087/ https_proxy=$http_proxy HTTP_PROXY=$http_proxy HTTPS_PROXY=$HTTP_PROXY"
+alias  gae-set-proxy="export http_proxy=http://127.0.0.1:8087/ HTTP_PROXY=http://127.0.0.1:8087/ HTTPS_PROXY=http://127.0.0.1:8087/ https_proxy=http://127.0.0.1:8087/"
 
 # awesome background
-export AWESOME_BG="/home/ghlin/Workspace/Wallpapers/com.png"
+# export AWESOME_BG="/home/ghlin/Workspace/Wallpapers/com.png"
+export AWESOME_BG="/home/ghlin/Pictures/2.png"
 export AWESOME_THEME='vertex'
 export AWESOME_WIBOX_POSITION='bottom'
 

@@ -68,7 +68,7 @@ function! BasicSettings() "{{{
   command! -bang -nargs=? Q :echo "手抖你麻痹啊"
 
   " path
-  set path^=~/include,.,.. " this makes completion slow
+  set path^=~/include,~/.local/include,.,.. " this makes completion slow
 
   " formats
   set fileformat   =unix
@@ -243,15 +243,16 @@ function! GuiSettings() "{{{
   "set guifont     =Courier\ New\ 10
   "set gfw         =MingLiU\ 10
 
-  " set guifont     =PT\ Mono 11
-  " set gfw         =Microsoft\ YaHei\ 11
+  "set guifont     =Ubuntu\ Mono\ 11
+  "set gfw         =Microsoft\ YaHei\ 11
 
-  set guifont     =Fixedsys\ Excelsior\ 3.01-L2\ 11
-  set gfw         =MingLiU\ 11
+  "set guifont     =Fixedsys\ Excelsior\ 3.01-L2\ 11
+  "set gfw         =MingLiU\ 11
 
-  colorscheme      darkgreen
-  set cul
-  set background  =dark
+  set guifont     =clean\ 8
+  set gfw         =MingLiU\ 8
+
+  " set cul
 
   set mouse       =
 endfunction "}}}
@@ -261,17 +262,20 @@ function! TermSettings() "{{{
     set t_Co=256
 
     " kde konsole cursor shape hack
-    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+    " if $TERMEMU == "konsole"
+    "   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    "   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+    " endif
+    colorscheme      mono
   else
     set t_Co=8
     " let &t_SI = "\<Esc>[?6;13;0;c"
     " let &t_EI = "\<Esc>[?16;13;0;c"
+    colorscheme      mono
   endif
 
   let g:airline_theme = 'monochrome'
-  colorscheme      molokai
-  set cul
+  " set cul
 
   set title
   set termencoding=utf-8

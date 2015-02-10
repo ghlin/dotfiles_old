@@ -25,6 +25,10 @@
   Plugin 'tomasr/molokai'
 " }}}
 
+" {{{ vim-dracula
+  Plugin 'crusoexia/vim-dracula'
+" }}}
+
 " {{{ Color-Scheme-Exploer
   Plugin 'Color-Scheme-Explorer'
 " }}}
@@ -218,6 +222,7 @@
 " {{{ nerdtree
   Plugin 'scrooloose/nerdtree'
   nmap  <leader>E :NERDTreeToggle<CR>
+  let g:NERDTreeDirArrows=0
   let g:NERDTreeWinSize  = 18
   let g:NERDTreeSortOrder = [
                   \   '\/$'
@@ -227,7 +232,9 @@
                   \ , '\.lua$'
                   \ , '\.run$'
                   \ , '*', '\.swp$', '\~$' ]
-  let NERDTreeDirArrows=1
+
+  hi link NERDTreePart Normal
+  hi link NERDTreePartFile Normal
 " }}}
 
 " {{{ surround
