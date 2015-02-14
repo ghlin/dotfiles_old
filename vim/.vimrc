@@ -178,20 +178,20 @@ function! BasicSettings() "{{{
   " when forget use `sudo'
   com! -nargs=0 ForceSave     :w !sudo tee % &>/dev/null
 
-  function! YDCVFromInput()
-    let @z = input('ydcv >>> ')
+  function! SDCVFromInput()
+    let @z = input('sdcv >>> ')
     redir =>dict
-    silent exec '!ydcv --color=never ' . @z
+    silent exec '!sdcv --non-interactive ' . @z
     redir END
     echo dict
   endfunction
 
-  com! -nargs=0 YDCV          :call YDCVFromInput()
+  com! -nargs=0 SDCV          :call SDCVFromInput()
 
   if has('gui_running')
-    set keywordprg         =ydcv\ --color=never
+    set keywordprg         =sdcv\ --non-interactive
   else
-    set keywordprg         =ydcv
+    set keywordprg         =sdcv
   endif
 
   " <C-R>=ExecPipe('colo') ==> solarized
@@ -249,10 +249,14 @@ function! GuiSettings() "{{{
   "set guifont     =Fixedsys\ Excelsior\ 3.01-L2\ 11
   "set gfw         =MingLiU\ 11
 
-  set guifont     =clean\ 8
-  set gfw         =MingLiU\ 8
+  "set guifont     =clean\ 8
+  "set gfw         =MingLiU\ 8
+
+  set guifont     =Lucida\ Console\ 12
+  set gfw         =Lucida\ Console\ 12
 
   " set cul
+  colo midnight_no_italic
 
   set mouse       =
 endfunction "}}}
@@ -260,23 +264,13 @@ endfunction "}}}
 function! TermSettings() "{{{
   if $TERM == "xterm"
     set t_Co=256
-
-    " kde konsole cursor shape hack
-    " if $TERMEMU == "konsole"
-    "   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-    "   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-    " endif
-    colorscheme      mono
+    colorscheme      lingo
   else
     set t_Co=8
-    " let &t_SI = "\<Esc>[?6;13;0;c"
-    " let &t_EI = "\<Esc>[?16;13;0;c"
     colorscheme      mono
   endif
 
   let g:airline_theme = 'monochrome'
-  " set cul
-
   set title
   set termencoding=utf-8
 endfunction "}}}

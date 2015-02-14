@@ -120,7 +120,8 @@ fu! AM_toggle_global()
 endfu
 
 com! -nargs=1 -complete=dir              AMInc      cal AM_add_incpath('<args>')
-com! -nargs=1 -complete=dir              AMLib      cal AM_add_libpath('<args>')
+com! -nargs=1 -complete=dir              AMLibPath  cal AM_add_libpath('<args>')
+com! -nargs=1 -complete=dir              AMLib      cal AM_add_lib('<args>')
 com! -nargs=0                            AMToggleB  cal AM_toggle_for_buffer()
 com! -nargs=0                            AMToggleG  cal AM_toggle_global()
 

@@ -1,11 +1,12 @@
-if [[ $TERM == "xterm" ]] {
-  export TERM="xterm-256color"
-}
+# if [[ $TERM == "xterm" ]] {
+#   export TERM="xterm-256color"
+# }
 
 ZSH=/usr/share/oh-my-zsh/
 
 DISABLE_AUTO_UPDATE="true"
 
+# ZSH_THEME="ghlin"
 ZSH_THEME="ghlin"
 
 plugins=(git sudo)
@@ -16,7 +17,7 @@ source $ZSH/oh-my-zsh.sh
 setopt INTERACTIVE_COMMENTS
 
 # zsh-syntax-highlighting
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 export PATH="$PATH:$HOME/.local/bin/:$HOME/WineApp/"
 
@@ -42,9 +43,10 @@ alias  gae-set-proxy="export http_proxy=http://127.0.0.1:8087/ HTTP_PROXY=http:/
 
 # awesome background
 # export AWESOME_BG="/home/ghlin/Workspace/Wallpapers/com.png"
-export AWESOME_BG="/home/ghlin/Pictures/2.png"
+export AWESOME_BG="/home/ghlin/Pictures/ArchLinux/Archlinux.png"
 export AWESOME_THEME='vertex'
 export AWESOME_WIBOX_POSITION='bottom'
+# export AWESOME_USE_TINT2='yes'
 
 #
 export SHDIR="/media/shared/data"

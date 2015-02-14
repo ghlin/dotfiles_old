@@ -18,28 +18,30 @@ fi
 # exec startxfce4
 
 
-eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
-export SSH_AUTH_SOCK
 
-pkill nm-applet;
-pkill xfconfd
+# eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+# export SSH_AUTH_SOCK
+
+# pkill nm-applet;
+# pkill xfconfd
+
+case "$1" in
+  "x")
+    echo "Selected -> XFCE4"
+    WMPRG="startxfce4"
+    ;;
+  "a")
+    echo "Selected -> Awesome WM"
+    WMPRG="dbus-launch awesome"
+    ;;
+  *)
+    echo "Selected -> Awesome WM"
+    WMPRG="startxfce4"
+    ;;
+esac
 
 
-
-exec nm-applet &
-exec dbus-launch awesome
-
-
-# case "$1" in
-#   "e")
-#     echo "Selected -> Enghlightenment17"
-#     exec /usr/bin/enlightenment_start
-#     ;;
-#   *)
-#     echo "Selected -> Awesome WM"
-#     exec dbus-launch awesome
-#     ;;
-# esac
-#
+# exec nm-applet &
+exec $WMPRG
 
 
