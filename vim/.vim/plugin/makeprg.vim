@@ -12,6 +12,8 @@ let g:AM_config = {
       \ }
 
 let g:AM_enabled = 1
+let g:AM_locked  = 0
+let g:AM_lock    = ""
 
 fu! AM_init()
   let need_init = !exists('b:AM_init_done')
@@ -47,6 +49,11 @@ fu! AM_enter_buffer()
     return
   en
 
+  if g:AM_locked == 1
+    cal AM_set_locked_makeprg()
+    return
+  en
+
   if !g:AM_enabled | !b:AM_enabled
     " disabled
   elseif b:AM_use_user_makeprg
@@ -59,6 +66,26 @@ fu! AM_enter_buffer()
 endfu
 
 fu! AM_after()
+endfu
+
+fu! AM_toggle_lock()
+  if g:AM_locked
+    call AM_unlock()
+    return
+  en
+
+  call AM_lock()
+endfu
+
+fu! AM_lock()
+  let g:AM_locked = 1
+  let g:AM_locked_makeprg = b:AM_makeprg
+
+  echo "lock to " . g:AM_locked_makeprg
+endfu
+
+fu! AM_unlock()
+  let g:AM_locked = 0
 endfu
 
 fu! AM_build_makeprg()
@@ -90,6 +117,7 @@ fu! AM_update_makeprg()
 endfu
 
 autocmd! BufEnter,BufRead *.c,*.cc,*.cpp,*.c++,*.cxx cal AM_enter_buffer()
+autocmd! BufEnter,BufRead *.h,*.hh,*.hpp,*.inl       cal AM_lock_for_all()
 
 fu! AM_add_flag(flag)
   cal insert(b:AM_config.gflags, a:flag)
@@ -119,11 +147,22 @@ fu! AM_toggle_global()
   let g:AM_enabled = !g:AM_enabled
 endfu
 
+fu! AM_set_locked_makeprg()
+  exec 'setlocal makeprg =' . g:AM_locked_makeprg
+endfu
+
+fu! AM_lock_for_all()
+  if g:AM_locked == 1
+    cal AM_set_locked_makeprg()
+  en
+endfu
+
 com! -nargs=1 -complete=dir              AMInc      cal AM_add_incpath('<args>')
 com! -nargs=1 -complete=dir              AMLibPath  cal AM_add_libpath('<args>')
 com! -nargs=1 -complete=dir              AMLib      cal AM_add_lib('<args>')
 com! -nargs=0                            AMToggleB  cal AM_toggle_for_buffer()
 com! -nargs=0                            AMToggleG  cal AM_toggle_global()
+com! -nargs=0                            AMLock     cal AM_toggle_lock()
 
 com! -nargs=1 -complete=customlist,AM_complete_cflag
       \ AMFlag     cal AM_add_flag('<args>')

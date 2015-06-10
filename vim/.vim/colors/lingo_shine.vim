@@ -3,10 +3,6 @@
 
 hi clear
 
-if has('gui')
-  set nocul
-endif
-
 let colors_name = 'lingo_shine'
 set background=light
 

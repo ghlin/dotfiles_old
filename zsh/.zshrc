@@ -27,6 +27,8 @@ alias  start-httpd="sudo systemctl start httpd"
 alias  random-seq="uuidgen| cut -b 1-8"
 unalias sl
 
+alias :q="exit"
+
 # grep updated
 alias  grep="grep --exclude-dir=.cvs --exclude-dir=.git --exclude-dir=.hg --exclude-dir=.svn --color=auto"
 unset  GREP_OPTIONS
@@ -34,12 +36,10 @@ unset  GREP_OPTIONS
 alias  scrot="scrot -e 'mv \$f $HOME/Pictures'"
 alias  dt-stamp="date +'%F-%H-%M-%S'"
 
-# GAE ALIAS
-alias  gae-restart="sudo systemctl restart goagent"
-alias  gae-stop="sudo systemctl stop goagent"
-alias  gae-start="sudo systemctl start goagent"
-alias  gae-status="watch systemctl status goagent -l"
-alias  gae-set-proxy="export http_proxy=http://127.0.0.1:8087/ HTTP_PROXY=http://127.0.0.1:8087/ HTTPS_PROXY=http://127.0.0.1:8087/ https_proxy=http://127.0.0.1:8087/"
+alias  enable-proxy="source ~/.local/lib/setup-proxy.sh"
+alias  git-set-proxy="export GIT_PROXY_COMMAND=/home/ghlin/.local/lib/gitproxy-corkscrew.sh"
+
+export MY_GIT_PROXY_COMMAND="/home/ghlin/.local/lib/gitproxy-corkscrew.sh"
 
 # awesome background
 # export AWESOME_BG="/home/ghlin/Workspace/Wallpapers/com.png"
@@ -60,6 +60,23 @@ export INFINALITY_FT_CHROMEOS_STYLE_SHARPENING_STRENGTH=50
 
 # color gcc output
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+x11grab-ranged() {
+  SIZE_ARGS="$1"
+  AUDIO_ARGS="-f alsa -acodec ac3 -ac 2"
+  VIDEO_ARGS="-f x11grab -r 30 -s $SIZE_ARGS -i $DISPLAY -c:v libx264 -preset ultrafast -crf 0"
+  PREFIX="~/Videos/"
+  FILENAME="`date +'x11grab-%F-%H-%M-%S.mkv'`"
+  OUTPUT="$PREFIX/$FILENAME"
+  FFMPEG_CMD="ffmpeg $AUDIO_ARGS $VIDEO_ARGS $OUTPUT -stats"  # -v error"
+
+  echo "VIDEO ARGS -> $VIDEO_ARGS"
+  echo "AUDIO ARGS -> $AUDIO_ARGS"
+  echo "OUTPUT     -> $OUTPUT"
+  echo "FFMPEG_CMD -> $FFMPEG_CMD"
+
+  eval "$FFMPEG_CMD"
+}
 
 x11grab() {
   case $1 in
@@ -107,5 +124,22 @@ vundle-install() {
 
 find-process() {
   ps -aux| grep $*| grep -v grep
+}
+
+mcd() {
+  mkdir "$1" && cd "$1"
+}
+
+ss-stop() {
+  sudo systemctl stop   shadowsocks@$1
+}
+
+ss-start() {
+  sudo systemctl start  shadowsocks@$1
+}
+
+ss-switch() {
+  ss-stop   $1
+  ss-start  $2
 }
 

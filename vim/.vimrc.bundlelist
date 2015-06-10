@@ -88,6 +88,10 @@
   Plugin 'vim-jp/cpp-vim'
 " }}}
 
+" {{{ vim-toml TOML
+  Plugin 'cespare/vim-toml'
+" }}}
+
 " }}}
 
 " {{{ Tools
@@ -112,18 +116,18 @@
 " }}}
 
 " {{{ Vim-Multiple-Cursors
-  Plugin 'terryma/vim-multiple-cursors'
+"  Plugin 'terryma/vim-multiple-cursors'
 " }}}
 
 " {{{ indentLine
-" Plugin 'Yggdroot/indentLine'
-" let g:indentLine_faster = 1
+  Plugin 'Yggdroot/indentLine'
+  let g:indentLine_faster = 1
 " }}}
 
 " {{{ rainbow_parentheses.vim for scheme
   Plugin 'kien/rainbow_parentheses.vim'
-  au BufEnter,BufRead *.scm :RainbowParenthesesActivate
-  au BufEnter,BufRead *.scm :RainbowParenthesesLoadRound
+  au BufEnter,BufRead *.scm,*.c,*.h,*.cc,*.scheme,*.lisp,*.elisp :RainbowParenthesesActivate
+  au BufEnter,BufRead *.scm,*.c,*.h,*.cc,*.scheme,*.lisp,*.elisp :RainbowParenthesesLoadRound
 " }}}
 
 " {{{ Clang Complete
@@ -156,7 +160,7 @@
 " }}}
 
 " {{{ airline   pretty status-line
-  Plugin 'bling/vim-airline'
+  " Plugin 'bling/vim-airline'
   let g:airline_mode_map = { '__' : '-', 'n'  : 'N', 'i'  : 'I',
       \ 'R'  : 'R', 'c'  : 'C', 'v'  : 'V', 'V'  : 'V',
       \ '' : 'V', 's'  : 'S', 'S'  : 'S', '' : 'S', }
@@ -195,12 +199,6 @@
   let g:airline#extensions#branch#displayed_head_limit = 10
 
   let g:airline#extensions#tabline#enabled             = 0
-
-"  let g:airline#extensions#tabline#left_sep         = g:airline_left_sep
-"  let g:airline#extensions#tabline#right_sep        = g:airline_right_sep
-"  let g:airline#extensions#tabline#show_buffers     = 1
-"  let g:airline#extensions#tabline#show_tab_nr      = 1
-"  let g:airline#extensions#tabline#buffer_min_count = 1
 " }}}
 
 " {{{ EasyAlign

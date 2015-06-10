@@ -1,6 +1,17 @@
-""
-" <2012.2.9.ghl@gmail.com>
-" Happy Coding...
+" 2012.2.9.ghl@gmail.com
+"
+"        /-\       ,-\
+"       |   \     /   |
+"       |    \   /    /
+"       |     >-/    /
+"        \         /`
+"         >-- /\ -<
+"        (   /  \  )
+"         |/     \/
+"         /
+"
+"
+"　　　　　　　　　　　　反　魂　蝶　で　あ　る　！
 
 function! LoadPlugins() "{{{
   " required by Vundle
@@ -48,7 +59,7 @@ function! BasicSettings() "{{{
   set ruler
   set showcmd
   set wildmenu
-  set laststatus =2
+  set laststatus =0
   set cmdheight  =1
   set report     =0
   set novisualbell
@@ -164,7 +175,7 @@ function! BasicSettings() "{{{
   com! -nargs=0 CD            :cd        %:h
 
   " perform cpp
-  com! -nargs=0 PreProc       :!g++ % -o %:p:r.i -E -std=gnu++11 -I"/home/$USER/include" -DDEBUG=1
+  com! -nargs=0 PreProc       :!g++ % -o %:p:r.i -E -std=gnu++14 -I"/home/$USER/include" -DDEBUG=1
 
   " delete this file
   com! -nargs=0 RmThis        :!rm       % -v
@@ -232,45 +243,40 @@ function! GuiSettings() "{{{
     set guioptions    =cfi
   endif
 
-  com! -nargs=0 Demode :call Demode()
-
-  " set guifont     =envypn
-  " set gfw         =MingLiU\ 10
-
+  "set guifont     =envypn
   "set guifont     =Tamsyn\ 10
-  "set gfw         =MingLiU\ 10
-
   "set guifont     =Courier\ New\ 10
-  "set gfw         =MingLiU\ 10
-
   "set guifont     =Ubuntu\ Mono\ 11
-  "set gfw         =Microsoft\ YaHei\ 11
-
   "set guifont     =Fixedsys\ Excelsior\ 3.01-L2\ 11
-  "set gfw         =MingLiU\ 11
-
   "set guifont     =clean\ 8
-  "set gfw         =MingLiU\ 8
+  "set guifont     =Lucida\ Console\ 12
+   set guifont     =Fantasque\ Sans\ Mono\ 12
+  "set guifont     =CamingoCode\ 11
 
-  set guifont     =Lucida\ Console\ 12
-  set gfw         =Lucida\ Console\ 12
 
-  " set cul
-  colo midnight_no_italic
+  let &gfw        =&guifont
 
+  set  cul
+  colo numix
   set mouse       =
+
+  winsize 80 25
 endfunction "}}}
 
 function! TermSettings() "{{{
   if $TERM == "xterm"
     set t_Co=256
-    colorscheme      lingo
+    colorscheme      numixnb
+    " hot fix
+    hi!  TabLine      ctermfg=white ctermbg=234 cterm=none term=none
+    hi!  TabLineFill  ctermfg=white ctermbg=234 cterm=none term=none
+    " hi!  clear  CursorLine
   else
     set t_Co=8
-    colorscheme      mono
+    colorscheme      numixnb
   endif
 
-  let g:airline_theme = 'monochrome'
+  let g:airline_theme = 'raven'
   set title
   set termencoding=utf-8
 endfunction "}}}
