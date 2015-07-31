@@ -55,7 +55,6 @@ function lnk()
 subinst "vim"
 # vim/.vim -> $HOME/.vim
 lnk "$DF_REPO/vim/.vim"    "$DF_HOME/.vim"
-lnk "$DF_HOME/.vim/.vimrc" "$DF_HOME/.vimrc"
 
 # for zsh
 subinst "zsh"

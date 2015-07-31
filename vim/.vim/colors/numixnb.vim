@@ -69,49 +69,49 @@ if has("gui_running")
   hi link cDefine           PreProc
   hi link cPreCondit        PreProc
 else
-  hi  Comment          cterm=none            ctermfg=DarkGreen
-  hi  Constant         cterm=none            ctermfg=DarkGray
-  hi  DiffAdd                                                           ctermbg=LightBlue
-  hi  DiffChange                                                        ctermbg=LightMagenta
-  hi  DiffDelete                             ctermfg=Blue               ctermbg=LightCyan
-  hi  DiffText                                                          ctermbg=Red
-  hi  Directory                              ctermfg=DarkBlue
-  hi  ErrorMsg                               ctermfg=White              ctermbg=DarkRed
-  hi  FoldColumn                             ctermfg=DarkBlue           ctermbg=Gray
-  hi  Folded                                 ctermfg=DarkGray           ctermbg=none
-  hi  Identifier       cterm=none            ctermfg=DarkBlue
-  hi  IncSearch        cterm=reverse
-  hi  MatchParen       cterm=none            ctermfg=DarkBlue           ctermbg=none
-  hi  ModeMsg          cterm=bold
-  hi  MoreMsg                                ctermfg=DarkGreen
-  hi  NonText                                ctermfg=White
-  hi  Pmenu                                                             ctermbg=DarkBlue
-  hi  PmenuSel                               ctermfg=White              ctermbg=DarkBlue
-  hi  PreProc          cterm=none            ctermfg=DarkGreen
-  hi  Question                               ctermfg=DarkGreen
-  hi  Search                                 ctermfg=White              ctermbg=Red
-  hi  Special          cterm=none            ctermfg=DarkBlue
-  hi  SpecialKey                             ctermfg=DarkBlue
-  hi  Statement        cterm=bold            ctermfg=Blue
-  hi  TabLine          cterm=none                                       ctermbg=none
-  hi  TabLineFill      cterm=none
-  hi  TabLineSel       cterm=bold            ctermfg=White              ctermbg=DarkGray
-  hi  Title                                  ctermfg=DarkBlue
-  hi  Todo             cterm=underline,bold  ctermfg=Red                ctermbg=none
-  hi  Type             cterm=none            ctermfg=Blue
-  hi  Visual           cterm=reverse                                    ctermbg=none
-  hi  VisualNOS        cterm=underline,bold
-  hi  WarningMsg                             ctermfg=DarkRed
-  hi  WildMenu                               ctermfg=White              ctermbg=Red
+  hi!  Comment          term=none cterm=none            ctermfg=DarkGreen
+  hi!  Constant         term=none cterm=none            ctermfg=DarkGray
+  hi!  DiffAdd          term=none cterm=none                                       ctermbg=LightBlue
+  hi!  DiffChange       term=none cterm=none                                       ctermbg=LightMagenta
+  hi!  DiffDelete       term=none cterm=none            ctermfg=Blue               ctermbg=LightCyan
+  hi!  DiffText         term=none cterm=none                                       ctermbg=Red
+  hi!  Directory        term=none cterm=none            ctermfg=DarkBlue
+  hi!  ErrorMsg         term=none cterm=none            ctermfg=White              ctermbg=DarkRed
+  hi!  FoldColumn       term=none cterm=none            ctermfg=DarkBlue           ctermbg=Gray
+  hi!  Folded           term=none cterm=none            ctermfg=DarkGray           ctermbg=none
+  hi!  Identifier       term=none cterm=none            ctermfg=DarkBlue
+  hi!  IncSearch        term=none cterm=reverse
+  hi!  MatchParen       term=none cterm=none            ctermfg=DarkBlue           ctermbg=none
+  hi!  ModeMsg          term=none cterm=bold
+  hi!  MoreMsg          term=none cterm=none            ctermfg=DarkGreen
+  hi!  NonText          term=none cterm=none            ctermfg=White
+  hi!  Pmenu            term=none cterm=none                                       ctermbg=DarkBlue
+  hi!  PmenuSel         term=none cterm=none            ctermfg=White              ctermbg=DarkBlue
+  hi!  PreProc          term=none cterm=none            ctermfg=DarkGreen
+  hi!  Question         term=none cterm=none            ctermfg=DarkGreen
+  hi!  Search           term=none cterm=none            ctermfg=White              ctermbg=Red
+  hi!  Special          term=none cterm=none            ctermfg=DarkBlue
+  hi!  SpecialKey       term=none cterm=none            ctermfg=DarkBlue
+  hi!  Statement        term=none cterm=none            ctermfg=Blue
+  hi!  TabLine          term=none cterm=none                                       ctermbg=none
+  hi!  TabLineFill      term=none cterm=none
+  hi!  TabLineSel       term=none cterm=none            ctermfg=White              ctermbg=DarkGray
+  hi!  Title            term=none cterm=none            ctermfg=DarkBlue
+  hi!  Todo             term=none cterm=underline,bold  ctermfg=Red                ctermbg=none
+  hi!  Type             term=none cterm=none            ctermfg=Blue
+  hi!  Visual           term=none cterm=reverse                                    ctermbg=none
+  hi!  VisualNOS        term=none cterm=underline
+  hi!  WarningMsg                             ctermfg=DarkRed
+  hi!  WildMenu                               ctermfg=White              ctermbg=Red
 
   "just patch here
-  hi clear CursorLineNr
-  hi clear CursorLine
-  hi clear ColorColumn
-  hi clear LineNr
-  hi clear StatusLine
-  hi clear StatusLineNC
-  hi clear VertSplit
+  hi! clear CursorLineNr
+  hi! clear CursorLine
+  hi! clear ColorColumn
+  hi! clear LineNr
+  hi! clear StatusLine
+  hi! clear StatusLineNC
+  hi! clear VertSplit
 
   hi! ColorColumn                                                      ctermbg=Gray
   hi! CursorLine       cterm=none

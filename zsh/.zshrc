@@ -1,10 +1,12 @@
+# if [[ $TERM == "xterm" ]] {
+#   export TERM="xterm-256color"
+# }
+
 ZSH=/usr/share/oh-my-zsh/
 
 DISABLE_AUTO_UPDATE="true"
 
-# ZSH_THEME="re5et"
-ZSH_THEME="gotcha"
-# ZSH_THEME="powerline"
+ZSH_THEME="ghlin"
 
 plugins=(git sudo)
 source $ZSH/oh-my-zsh.sh
@@ -12,40 +14,49 @@ source $ZSH/oh-my-zsh.sh
 # enable interactive comments
 setopt INTERACTIVE_COMMENTS
 
-# just source it, it`s much simple than to copy files
-# into ZSH_PLUGIN_DIR and add it to plugins
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-export PATH="$PATH:$HOME/.local/bin/"
-
-alias  gfw-me-not="source ~/.local/lib/cgfw.sh"
-alias  update-my-archlinux="yaourt -Syua"
-alias  just-update-my-archlinux="yaourt -Syua --noconfirm"
-alias  yaourt-Syua="yaourt -Syua"
-alias  start-httpd="sudo systemctl start httpd"
-alias  random-seq="uuidgen| cut -b 1-8"
-
-alias  scrot="scrot -e 'mv \$f $HOME/Pictures'"
-alias  mkdtdir="mkdir $(date +'%F-%H-%M-%S')"
-
-alias  restartgoagent="sudo systemctl restart goagent"
-alias  watchgoagent="watch systemctl status goagent -l"
-
-# awesome background
-#
-export AWESOME_BG="/home/ghlin/Pictures/youcannotredo-red.png"
-export AWESOME_THEME='vertex'
-
-# default editor
+export PATH="$PATH:$HOME/.local/bin/:$HOME/WineApp/:$HOME/.gem/ruby/2.2.0/bin/"
 export EDITOR=vim
+export MY_GIT_PROXY_COMMAND="$HOME/.local/lib/gitproxy-corkscrew.sh"
 
 # Fontconfig-Infinality
-export INFINALITY_FT_FILTER_PARAMS="20 20 30 20 20"
-export INFINALITY_FT_CHROMEOS_STYLE_SHARPENING_STRENGTH=50
-# export INFINALITY_FT_CONTRAST="30"
+export INFINALITY_FT_FILTER_PARAMS="20 50 60 50 20"
+export INFINALITY_FT_CHROMEOS_STYLE_SHARPENING_STRENGTH=20
 
 # color gcc output
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+alias  update-my-archlinux="yaourt -Syua"
+alias  just-update-my-archlinux="yaourt -Syua --noconfirm"
+alias  start-httpd="sudo systemctl start httpd"
+
+alias :q="exit"
+
+alias  grep="grep --exclude-dir=.cvs --exclude-dir=.git --exclude-dir=.hg --exclude-dir=.svn --color=auto"
+unset  GREP_OPTIONS
+
+alias  dt-stamp="date +'%F-%H-%M-%S'"
+
+alias  enable-proxy="source ~/.local/lib/setup-proxy.sh"
+alias  git-set-proxy="export GIT_PROXY_COMMAND=$HOME/.local/lib/gitproxy-corkscrew.sh"
+
+
+
+x11grab-ranged() {
+  SIZE_ARGS="$1"
+  AUDIO_ARGS="-f alsa -acodec ac3 -ac 2"
+  VIDEO_ARGS="-f x11grab -r 30 -s $SIZE_ARGS -i $DISPLAY -c:v libx264 -preset ultrafast -crf 0"
+  PREFIX="~/Videos/"
+  FILENAME="`date +'x11grab-%F-%H-%M-%S.mkv'`"
+  OUTPUT="$PREFIX/$FILENAME"
+  FFMPEG_CMD="ffmpeg $AUDIO_ARGS $VIDEO_ARGS $OUTPUT -stats"  # -v error"
+
+  echo "VIDEO ARGS -> $VIDEO_ARGS"
+  echo "AUDIO ARGS -> $AUDIO_ARGS"
+  echo "OUTPUT     -> $OUTPUT"
+  echo "FFMPEG_CMD -> $FFMPEG_CMD"
+
+  eval "$FFMPEG_CMD"
+}
 
 x11grab() {
   case $1 in
@@ -91,5 +102,55 @@ vundle-install() {
   vim -c "execute \"PluginInstall\"|q|q"
 }
 
+find-process() {
+  ps -aux| grep $*| grep -v grep
+}
 
+mcd() {
+  mkdir "$1" && cd "$1"
+}
+
+ss-stop() {
+  sudo systemctl stop   shadowsocks@$1
+}
+
+ss-start() {
+  sudo systemctl start  shadowsocks@$1
+}
+
+ss-switch() {
+  ss-stop   $1
+  ss-start  $2
+}
+
+ss-ctrl() {
+  sudo systemctl $1 shadowsocks@$2
+}
+
+ss-list-config() {
+  ls /etc/shadowsocks/
+}
+
+ss-current() {
+  sudo systemctl list-units   \
+    | grep shadowsocks@       \
+    | head -n 1               \
+    | sed 's/\s*shadowsocks@\(.*\).service\s*.*/\1/g'
+}
+
+ss-current-config() {
+  echo "/etc/shadowsocks/`ss-current`.json"
+}
+
+ss-dbg() {
+  current=`ss-current`
+
+  echo "running shadowsocks service: $current";
+
+  ss-stop "$current"
+  sslocal -vv -c "/etc/shadowsocks/$current.json"
+
+  ss-start "$current"
+  echo "\nrestarted :$current"
+}
 

@@ -72,7 +72,7 @@ def make_box(twidth, bwidth = None):
       bwidth = twidth + 2
    b,m,e,i = _get_comment_format()
    sline = b + m + bwidth*m + 2*m
-   nspaces = (bwidth - twidth)//2 
+   nspaces = (bwidth - twidth)//2
    mlines = i + m + " " + " "*nspaces
    mlinee = " " + " "*(bwidth-twidth-nspaces) + m
    eline = i + 2*m + bwidth*m + m + e
@@ -113,6 +113,16 @@ snippet { "{}" i
 {
   $1
 }$0
+endsnippet
+
+snippet fff "folder region" !b
+// {{{ ${1:region description}
+$0
+// }}}
+endsnippet
+
+snippet ftm "formatted time string" !i
+`!v strftime("%F %T")`
 endsnippet
 
 # vim:ft=snippets:

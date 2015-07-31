@@ -2,9 +2,6 @@
 " Colorscheme by ghl
 
 hi clear
-if(has('gui'))
-  set nocul
-endif
 
 let colors_name = 'lingo_light'
 set background=light

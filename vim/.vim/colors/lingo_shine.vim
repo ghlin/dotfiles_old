@@ -3,10 +3,6 @@
 
 hi clear
 
-if has('gui')
-  set nocul
-endif
-
 let colors_name = 'lingo_shine'
 set background=light
 
@@ -60,7 +56,7 @@ hi WildMenu     gui=underline                 guifg=Black              guibg=Dar
 hi Todo         gui=underline,bold   guifg=DarkRed    guibg=bg
 hi Comment      gui=none             guifg=DarkGreen
 hi Constant     gui=none             guifg=#004400
-hi Identifier   gui=underline        guifg=Blue
+hi Identifier   gui=none             guifg=Blue
 hi PreProc      gui=none             guifg=#002500
 hi Special      gui=none             guifg=DarkGreen
 hi Statement    gui=bold             guifg=DarkBlue

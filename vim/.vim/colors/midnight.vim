@@ -14,7 +14,7 @@ if exists("syntax_on")
   syntax reset
 endif
 
-let g:colors_name="molokaii"
+let g:colors_name="midnight"
 
 set nocul
 

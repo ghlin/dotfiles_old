@@ -1,170 +1,186 @@
-" auto set makeprg
 
-let g:default_compiler = 'GCC'
+let g:AM_config = {
+      \ 'libpath' : [ '.', '/home/$USER/lib', '/home/$USER/.local/lib' ],
+      \ 'incpath' : [ '.', '/home/$USER/include', '/home/$USER/.local/include' ],
+      \ 'libs'    : [ 'pthread', 'dl' ],
+      \ 'gflags'  : [ '-Wall', '-Wextra', '-g', '-fextended-identifiers' ],
+      \ 'cflags'  : [ '-std=gnu99' ],
+      \ 'cxxflags': [ '-std=gnu++14' ],
+      \ 'ccompiler'   : 'clang',
+      \ 'cxxcompiler' : 'clang++',
+      \ 'exec_ext'    : 'run'
+      \ }
 
-function! Makeprg_init()
-  let need_do_init = !exists('b:makeprg_loaded')
+let g:AM_enabled = 1
+let g:AM_locked  = 0
+let g:AM_lock    = ""
 
-  if need_do_init
-    let b:libpath = ['.', '/home/$USER/lib', '/home/$USER/.local/lib']
-    let b:incpath = ['/home/$USER/include', '/home/$USER/.local/include']
+fu! AM_init()
+  let need_init = !exists('b:AM_init_done')
 
-    " freq-used
-    let b:libs = ['pthread', 'lua', 'dl']
-    let b:flags = ['-Wall', '-Werror', '-g']
-    let b:ccflags = ['-std=gnu99']
-    let b:cxflags = ['-std=gnu++11']
+  if need_init
+    let b:AM_config = deepcopy(g:AM_config)
+    let b:AM_enabled = 1
+    let b:AM_user_makeprg = 'make'
+    let b:AM_use_user_makeprg = 0
 
-    let b:makeprg_enabled = 1
-    let b:makeprg_loaded  = 1
+    cal AM_update_makeprg()
 
-    let b:compiler = g:default_compiler
+    let b:AM_init_done = 1
 
-    let b:makeprg_user_defined_makeprg = "make"
-    let b:makeprg_user_defined         = 0
+    return 1
+  en
 
-    call Makeprg_check_cc()
-  endif
+  return 0
+endfu
 
-  call Makeprg_update()
-endfunction
-
-function! Makeprg_check_cc()
-  if b:compiler == 'GCC'
-    let b:cc = 'gcc'
-    let b:cx = 'g++'
-  elseif b:compiler == 'CLANG'
-    let b:cc = 'clang'
-    let b:cx = 'clang++'
-  endif
-endfunction
-
-function! Makeprg_check_compiler()
+fu! AM_check_filetype()
   if &ft == 'c'
-    let b:c = b:cc
-    let b:f = b:ccflags
+    let b:AM_config.compiler = b:AM_config.ccompiler
+    let b:AM_config.flags = b:AM_config.cflags
   elseif &ft == 'cpp'
-    let b:c = b:cx
-    let b:f = b:cxflags
-  endif
-endfunction
+    let b:AM_config.compiler = b:AM_config.cxxcompiler
+    let b:AM_config.flags = b:AM_config.cxxflags
+  en
+endfu
 
-function! Makeprg_auto()
-  let b:makeprg_user_defined = 0
-  call Makeprg_init()
-endfunction
-
-function! Makeprg_user()
-  let b:makeprg_user_defined = 1
-  call Makeprg_init()
-endfunction
-
-function! Makeprg_user_defined(makeprg)
-  let b:makeprg_user_defined_makeprg = a:makeprg
-  echo "Set makeprg to: " . a:makeprg
-  call Makeprg_user()
-endfunction
-
-function! Makeprg_update()
-  if !b:makeprg_enabled
+fu! AM_enter_buffer()
+  if AM_init()
     return
-  endif
+  en
 
-  if b:makeprg_user_defined
-    exec 'setlocal makeprg=' . b:makeprg_user_defined_makeprg
+  if g:AM_locked == 1
+    cal AM_set_locked_makeprg()
     return
-  endif
+  en
 
-  if !exists('b:makeprg_builded')
-    let b:makeprg_builded = 1
-    call Makeprg_build_makeprg()
-  endif
+  if !g:AM_enabled | !b:AM_enabled
+    " disabled
+  elseif b:AM_use_user_makeprg
+    exec 'setlocal makeprg =' . b:AM_user_makeprg
+  else
+    cal AM_update_makeprg()
+  en
 
-  if b:makeprg_enabled
-    exec 'setlocal makeprg=' . b:makeprg
-  endif
-endfunction
+  cal AM_after()
+endfu
 
-function! Makeprg_build_makeprg()
-  call Makeprg_check_compiler()
+fu! AM_after()
+endfu
 
-  let b:common = b:c . '\ ' . expand('%') . '\ -o\ ' . expand('%:p:r') . '.run'
+fu! AM_toggle_lock()
+  if g:AM_locked
+    call AM_unlock()
+    return
+  en
 
-  for item in b:libpath
-    let b:common = b:common . '\ -L' . item
+  call AM_lock()
+endfu
+
+fu! AM_lock()
+  let g:AM_locked = 1
+  let g:AM_locked_makeprg = b:AM_makeprg
+
+  echo "lock to " . g:AM_locked_makeprg
+endfu
+
+fu! AM_unlock()
+  let g:AM_locked = 0
+endfu
+
+fu! AM_build_makeprg()
+  cal AM_check_filetype()
+
+  let l:makeprg = b:AM_config.compiler . '\ ' . escape(expand('%'), ' ') . '\ -o\ '
+        \ . escape(expand('%:p:r'), ' ') . '.' . b:AM_config.exec_ext
+
+  let l:arg = [
+        \ [ 'libpath', '\ -L' ],
+        \ [ 'incpath', '\ -I' ],
+        \ [ 'libs',    '\ -l' ],
+        \ [ 'flags',   '\ ' ],
+        \ [ 'gflags',  '\ ' ]
+        \ ]
+
+  for i in l:arg
+    for x in b:AM_config[i[0]]
+      let l:makeprg = l:makeprg . i[1] . '\"' . x . '\"'
+    endfor
   endfor
 
-  for item in b:incpath
-    let b:common = b:common . '\ -I' . item
-  endfor
+  let b:AM_makeprg = l:makeprg
+endfu
 
-  for item in b:libs
-    let b:common = b:common . '\ -l' . item
-  endfor
+fu! AM_update_makeprg()
+  cal AM_build_makeprg()
+  exec 'setlocal makeprg =' . b:AM_makeprg
+endfu
 
-  for item in b:f
-    let b:common = b:common . '\ ' . item
-  endfor
+autocmd! BufEnter,BufRead *.c,*.cc,*.cpp,*.c++,*.cxx cal AM_enter_buffer()
+autocmd! BufEnter,BufRead *.h,*.hh,*.hpp,*.inl       cal AM_lock_for_all()
 
-  for item in b:flags
-    let b:common = b:common . '\ ' . item
-  endfor
+fu! AM_add_flag(flag)
+  cal insert(b:AM_config.gflags, a:flag)
+  cal AM_update_makeprg()
+endfu
 
-  let b:makeprg = b:common
-endfunction
+fu! AM_add_libpath(path)
+  cal insert(b:AM_config.libpath, a:path)
+  cal AM_update_makeprg()
+endfu
 
-autocmd! BufEnter,BufRead *.c,*.cc,*.cpp,*.c++,*.cxx,*.inl,*.h,*.hpp call Makeprg_init()
+fu! AM_add_incpath(path)
+  cal insert(b:AM_config.incpath, a:path)
+  cal AM_update_makeprg()
+endfu
+
+fu! AM_add_lib(lib)
+  cal insert(b:AM_config.libs, a:lib)
+  cal AM_update_makeprg()
+endfu
+
+fu! AM_toggle_for_buffer()
+  let b:AM_enabled = !b:AM_enabled
+endfu
+
+fu! AM_toggle_global()
+  let g:AM_enabled = !g:AM_enabled
+endfu
+
+fu! AM_set_locked_makeprg()
+  exec 'setlocal makeprg =' . g:AM_locked_makeprg
+endfu
+
+fu! AM_lock_for_all()
+  if g:AM_locked == 1
+    cal AM_set_locked_makeprg()
+  en
+endfu
+
+com! -nargs=1 -complete=dir              AMInc      cal AM_add_incpath('<args>')
+com! -nargs=1 -complete=dir              AMLibPath  cal AM_add_libpath('<args>')
+com! -nargs=1 -complete=dir              AMLib      cal AM_add_lib('<args>')
+com! -nargs=0                            AMToggleB  cal AM_toggle_for_buffer()
+com! -nargs=0                            AMToggleG  cal AM_toggle_global()
+com! -nargs=0                            AMLock     cal AM_toggle_lock()
+
+com! -nargs=1 -complete=customlist,AM_complete_cflag
+      \ AMFlag     cal AM_add_flag('<args>')
+com! -nargs=1 -complete=customlist,AM_complete_libs
+      \ AMUse      cal AM_add_lib('<args>')
+
+" TODO
+fu! AM_complete_cflag(A, L, C)
+  return [ '-rdynamic', '-shared', '-c' ]
+endfu
+
+fu! AM_complete_libs(A, L, C)
+  return [ 'boost_system', 'boost_context', 'lua' ]
+endfu
+
+
+" TODO
+"
 com! -nargs=* RunThis       :!%:p:r.run <args>
 nmap <leader>e    :!%:p:r.run<CR>
-
-function! Makeprg_add_flag(flag)
-  call insert(b:f, a:flag)
-  call Makeprg_build_makeprg()
-  call Makeprg_update()
-endfunction
-
-function! Makeprg_add_incpath(path)
-  call insert(b:incpath, a:path)
-  call Makeprg_build_makeprg()
-  call Makeprg_update()
-endfunction
-
-function! Makeprg_add_libpath(path)
-  call insert(b:libpath, a:path)
-  call Makeprg_build_makeprg()
-  call Makeprg_update()
-endfunction
-
-function! Makeprg_add_lib(lib)
-  call insert(b:libs, a:lib)
-  call Makeprg_build_makeprg()
-  call Makeprg_update()
-endfunction
-
-function! Makeprg_toggle()
-  let b:makeprg_enabled = !b:makeprg_enabled
-
-  if b:makeprg_enabled
-    echo "Auto Makeprg Enabled!"
-  else
-    echo "Auto Makeprg Disabled!"
-  endif
-endfunction
-
-function! CFlag(A, L, C)
-  " test command -complete=xxx
-  return ['-rdynamic', '-shared', '-c']
-endfunction
-
-
-
-command! -nargs=1 -complete=dir              MkIncpath  call Makeprg_add_incpath('<args>')
-command! -nargs=1 -complete=dir              MkLibpath  call Makeprg_add_libpath('<args>')
-command! -nargs=1                            MkLib      call Makeprg_add_lib('<args>')
-command! -nargs=0                            MkIncThis  call Makeprg_add_incpath('%:h')
-command! -nargs=1 -complete=customlist,CFlag MkFlag     call Makeprg_add_flag('<args>')
-command! -nargs=0                            MkToggle   call Makeprg_toggle()
-command! -nargs=1                            MkCustom   call Makeprg_user_defined('<args>')
-command! -nargs=0                            MkAuto     call Makeprg_auto()
-command! -nargs=0                            MkUser     call Makeprg_user()
 
