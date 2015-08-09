@@ -3,4 +3,6 @@ vim/.vim/.netrwhist
 *.swp
 *.swo
 *.o
+.viminfo
+*.run
 

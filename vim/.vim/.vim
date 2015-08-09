@@ -1,0 +1,1 @@
+/home/ghlin/.config/dotfiles/vim/.vim/
