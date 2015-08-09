@@ -29,6 +29,18 @@
   Plugin 'crusoexia/vim-dracula'
 " }}}
 
+" {{{ vim-colorschemes
+  Plugin 'flazz/vim-colorschemes'
+" }}}
+
+" {{{ google
+  Plugin 'google/vim-colorscheme-primary'
+" }}}
+
+" {{{ vim-kalisi
+  Plugin 'freeo/vim-kalisi'
+" }}}
+
 " {{{ Color-Scheme-Exploer
 " Plugin 'Color-Scheme-Explorer'
 " }}}
@@ -233,17 +245,20 @@
   let g:airline_symbols.branch     = "[BRANCH]"
   let g:airline_symbols.readonly   = "[RO]"
   let g:airline_symbols.linenr     = " "
-
   let g:airline_left_sep           = ""
   let g:airline_left_alt_sep       = ""
   let g:airline_right_sep          = ""
   let g:airline_right_alt_sep      = ""
 
-  if has('gui_running')
-    let g:airline_theme = 'tomorrow'
-  else
-    let g:airline_theme = 'monochrome'
-  endif
+  " let g:airline_left_sep = ''
+  " let g:airline_left_alt_sep = ''
+  " let g:airline_right_sep = ''
+  " let g:airline_right_alt_sep = ''
+  let g:airline_symbols.branch = ''
+  let g:airline_symbols.readonly = ''
+  let g:airline_symbols.linenr = ''
+
+  let g:airline_theme = 'monochrome'
 
   function! BufNr()
     return '#' . bufnr('%')
@@ -386,7 +401,7 @@
 " }}}
 
 " {{{
-" Plugin 'ryanoasis/vim-devicons'
+"  Plugin 'ryanoasis/vim-devicons'
 " }}}
 
 " }}}

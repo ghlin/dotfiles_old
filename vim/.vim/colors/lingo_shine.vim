@@ -6,7 +6,7 @@ hi clear
 let colors_name = 'lingo_shine'
 set background=light
 
-hi Normal                               guifg=Black              guibg=White
+hi Normal                               guifg=Black              guibg=#fffde6
 
 
 hi clear ColorColumn
@@ -15,7 +15,7 @@ hi Conceal                                    guifg=#0000ff            guibg=bg
 hi Cursor       gui=none                      guifg=White              guibg=Blue
 hi CursorColumn gui=italic,bold                                        guibg=bg
 hi CursorLine   gui=none                                               guibg=#dddddd
-hi CursorLineNr gui=bold                      guifg=Black              guibg=#dddddd
+hi CursorLineNr gui=bold                      guifg=Black
 hi DiffAdd                                    guifg=DarkBlue           guibg=bg
 hi DiffChange   gui=italic                    guifg=DarkGreen          guibg=bg
 hi DiffDelete                                 guifg=Red                guibg=bg

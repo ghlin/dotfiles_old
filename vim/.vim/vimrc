@@ -11,7 +11,7 @@
 "         /
 "
 "
-"　　　　　　　　　　　　反　魂　蝶　で　あ　る　！
+"                       反　魂　蝶　で　あ　る　！
 
 function! LoadPlugins() "{{{
   " required by Vundle
@@ -47,7 +47,7 @@ function! BasicSettings() "{{{
   set whichwrap  +=<,>,h,l
   set list
   set conceallevel=2
-  set listchars=tab:\ \ ,trail:-
+  set listchars=tab:^I,trail:-
 
   set backspace   =2
   set hidden
@@ -230,7 +230,7 @@ function! GuiSettings() "{{{
   set guicursor   =n-v-c:block-Cursor/lCursor
   set guicursor  ^=ve:ver5-Cursor
   set guicursor  ^=o:hor5-Cursor/lCursor
-  set guicursor  ^=i-ci:ver1-Cursor/lCursor
+  set guicursor  ^=i-ci:ver25-Cursor/lCursor
   set guicursor  ^=r-cr:hor1-Cursor/lCursor
   set guicursor  ^=sm:block-Cursor-blinkwait75-blinkoff55-blinkon55
 
@@ -241,33 +241,34 @@ function! GuiSettings() "{{{
     set guioptions    =i
   endif
 
-  set guioptions  +=mf
+  set guioptions  +=fm
 
   "set guifont     =CamingoCode\ 12
-  "set guifont     =Consolas\ 13
+   set guifont     =Consolas\ 13
   "set guifont     =Courier\ New\ 12
   "set guifont     =Courier\ Prime\ 12
   "set guifont     =DejaVu\ Sans\ Mono\ 12
-  "set guifont     =Fantasque\ Sans\ Mono\ 12
+  "set guifont     =Fantasque\ Sans\ Mono\ 13
   "set guifont     =Fixedsys\ Excelsior\ 3.01-L2\ 11
   "set guifont     =Liberation\ Mono\ 11
   "set guifont     =Lucida\ Console\ 11
-  "set guifont     =Lucida\ Console\ 11
+  "set guifont     =Lucida\ Console\ 13
   "set guifont     =Lucida\ Sans\ Typewriter\ O\ 11
   "set guifont     =Monaco\ 11
   "set guifont     =Monofur\ 13
   "set guifont     =PT\ Mono\ 12
-   set guifont     =PragmataPro\ 13
+  "set guifont     =PragmataPro\ 13
   "set guifont     =Source\ Code\ Pro\ Medium\ 13
   "set guifont     =Tamsyn\ 10
   "set guifont     =Ubuntu\ Mono\ 11
   "set guifont     =clean\ 8
   "set guifont     =envypn
+  "set guifont     =Iosevka\ 12
 
   let &gfw        =&guifont
 
 
-  colo lingo
+  colo efede6
 
   set mouse       =
 
