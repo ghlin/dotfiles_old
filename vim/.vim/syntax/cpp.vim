@@ -1,7 +1,6 @@
 
 
 
-
 syntax match cType      display "\w*_t\>"
 syntax match cStatement display "\<debug_\w*"
 syntax match cStatement display "\<WTF\>"

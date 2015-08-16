@@ -195,7 +195,7 @@
 
 " {{{ vim-racer Rust complete
 " Plugin 'ebfe/vim-racer'
-  Plugin 'phildawes/racer'
+" Plugin 'phildawes/racer'
 
   let g:racer_cmd    = "/home/ghlin/.local/lib/racer/racer"
   let $RUST_SRC_PATH = "/home/ghlin/.local/src/rust/rustc-1.0.0/src/"
@@ -254,14 +254,17 @@
   " let g:airline_left_alt_sep = ''
   " let g:airline_right_sep = ''
   " let g:airline_right_alt_sep = ''
-  let g:airline_symbols.branch = ''
-  let g:airline_symbols.readonly = ''
-  let g:airline_symbols.linenr = ''
+  " let g:airline_symbols.branch = ''
+  " let g:airline_symbols.readonly = ''
+  " let g:airline_symbols.linenr = ''
 
   let g:airline_theme = 'monochrome'
 
   function! BufNr()
     return '#' . bufnr('%')
+  endfunction
+  function! FFEnc()
+    return printf('%s%s', &fenc, strlen(&ff) > 0 ? ' ' . &ff : '')
   endfunction
 
   " exclude `currenttag'
@@ -270,7 +273,7 @@
         \ . '%{airline#util#wrap(airline#parts#filetype(),0)}'
 
   let g:airline_section_y =
-        \   '%{airline#util#prepend(airline#parts#ffenc(),0)}'
+        \   '%{airline#util#prepend(FFEnc(),0)}'
 
   let g:airline#extensions#tagbar#enabled              = 0
   let g:airline#extensions#branch#enabled              = 1

@@ -6,7 +6,8 @@ hi clear
 let colors_name = 'lingo_shine'
 set background=light
 
-hi Normal                               guifg=Black              guibg=White
+hi Normal                               guifg=Black              guibg=#fffde6
+
 
 hi clear ColorColumn
 hi ColorColumn                                                         guibg=#cccccc

@@ -55,7 +55,7 @@ hi WildMenu     gui=underline                 guifg=Black              guibg=Dar
 " syntax highlighting
 hi Todo         gui=underline,bold   guifg=DarkRed    guibg=bg
 hi Comment      gui=none             guifg=DarkGreen
-hi Constant     gui=none             guifg=#004400
+hi Constant     gui=none             guifg=DarkBlue
 hi Identifier   gui=none             guifg=Blue
 hi PreProc      gui=none             guifg=#002500
 hi Special      gui=none             guifg=DarkGreen
